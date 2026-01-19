@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 17:29:54 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/16 17:30:24 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/19 11:42:16 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int main(int argc, char **argv)
 	printf ("IGNORE THIS MSG %d\n", game.screen_height); // TEMP
 
 	// validate_input (game);
-	init_game (&game); // TODO
+	//init_game (&game); // TODO
 	// set_hooks (&game);
 	// mlx_loop (game.mlx);
 	// cleanup (&game);
