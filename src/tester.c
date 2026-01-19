@@ -1,4 +1,5 @@
 #include "data_types.h"
+#include "libft.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -6,13 +7,10 @@
 t_init_data	example_data(void)
 {
 	t_init_data	data;
-	t_map	mymap;
+	t_map	*mymap;
 
-	mymap.grid = NULL;
-	mymap.height = 5;
-	mymap.width = 5;
-	data.map = &mymap;
-
+	mymap = malloc (sizeof (t_map));
+	data.map = mymap;
 
 	const char *map_lines[] = {
 		"1111111111111111111111111",
@@ -52,10 +50,10 @@ t_init_data	example_data(void)
 		data.map->grid[i] = strdup(map_lines[i]);
 	}
 
-	data.north_tex = "./textures/North.xpm";
-	data.south_tex = "./textures/South.xpm";
-	data.east_tex = "./textures/East.xpm";
-	data.west_tex = "./textures/West.xpm";
+	data.north_tex = ft_strdup ("./textures/North.xpm");
+	data.south_tex = ft_strdup ("./textures/South.xpm");
+	data.east_tex = ft_strdup ("./textures/East.xpm");
+	data.west_tex = ft_strdup ("./textures/West.xpm");
 
 	data.ceiling_color[0] = 220;
 	data.ceiling_color[1] = 100;

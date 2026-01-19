@@ -6,13 +6,14 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 17:29:54 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/19 18:59:03 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/19 21:01:14 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "data_types.h"
 #include "main.h"
-#include <stdio.h>
+#include "mlx.h"
+#include <stdio.h> // TEMP
 
 int main(int argc, char **argv)
 {
@@ -26,13 +27,13 @@ int main(int argc, char **argv)
 	// parse_input (&data, argv[1]);
 
 	data = example_data (); // TEMP
-	printf ("IGNORE THIS MSG %d\n", game.screen_height); // TEMP
+	//printf ("IGNORE THIS MSG %d\n", game.screen_height); // TEMP
 
 	// validate_input (game);
-	init_system (&game, data); // TODO
-	// clear_data (data);
+	init_system (&game, data);
+	clear_data (data);
 	// set_hooks (&game);
-	// mlx_loop (game.mlx);
-	// cleanup (&game);
+	mlx_loop (game.mlx);
+	// clean_game (&game);
 	return (0);
 }

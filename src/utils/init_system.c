@@ -6,13 +6,13 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 12:18:22 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/19 19:54:49 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/19 21:02:35 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "data_types.h"
 #include "mlx.h"
-#include <stdio.h>
+#include <stdio.h> // TEMP
 
 void	set_player_dir(t_game *game, char c)
 {
@@ -64,10 +64,10 @@ t_image	init_image (t_game *game, char *address)
 
 void	load_textures(t_game *game, t_init_data data)
 {
-	game->textures[0] = init_image (game, data.north_tex);
-	game->textures[1] = init_image (game, data.south_tex);
-	game->textures[2] = init_image (game, data.east_tex);
-	game->textures[3] = init_image (game, data.west_tex);
+	game->textures[north] = init_image (game, data.north_tex);
+	game->textures[south] = init_image (game, data.south_tex);
+	game->textures[east] = init_image (game, data.east_tex);
+	game->textures[west] = init_image (game, data.west_tex);
 }
 
 int	convert_arr_to_color(int input[])
@@ -101,18 +101,29 @@ void	init_system(t_game *game, t_init_data data)
 	game->ceiling_color = convert_arr_to_color (data.ceiling_color);
 	load_textures (game, data);
 	game->frame = init_frame (game);
-	mlx_loop (game->mlx); // TEMP
-	
 }
 
-/*MLX context & window
+#include <stdlib.h>
+void	clear_data(t_init_data data)
+{
+	int	i;
 
-Frame buffer image
-
-Texture images loaded into GPU memory
-
-Player vectors (direction & camera plane)
-
-Raycasting buffers
-
-Input state*/
+	if (data.north_tex)
+		free (data.north_tex);
+	if (data.south_tex)
+		free (data.south_tex);
+	if (data.east_tex)
+		free (data.east_tex);
+	if (data.west_tex)
+		free (data.west_tex);
+	i = -1;
+	if (data.map)
+	{
+		if (data.map->grid)
+		{
+			while (++i < data.map->height)
+				free (data.map->grid[i]);
+			free (data.map->grid);
+		}
+	}
+}

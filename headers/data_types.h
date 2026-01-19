@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 12:04:36 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/19 19:54:46 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/19 20:05:18 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,10 @@
 # ifndef FOV
 #  define FOV 0.66
 # endif
+
+enum {
+	north, south, east, west
+};
 
 typedef struct s_map
 {
@@ -106,17 +110,17 @@ typedef struct s_image
 
 typedef struct s_game
 {
-	void		*mlx;//REVIEW
-	void		*win;//REVIEW
-	t_player	player;//REVIEW
-	t_map		*map;//REVIEW
-	t_image		textures[4];// REVIEW
+	void		*mlx;
+	void		*win;
+	t_player	player;
+	t_map		*map;
+	t_image		textures[4];
 	t_image		frame;
-	t_rayhit	*ray_hits;//REVIEW
-	int			screen_width; //REVIEW
-	int			screen_height; //REVIEW
-	int			floor_color;//REVIEW
-	int			ceiling_color;//REVIEW
+	t_rayhit	*ray_hits;
+	int			screen_width;
+	int			screen_height;
+	int			floor_color;
+	int			ceiling_color;
 } t_game;
 
 #endif
