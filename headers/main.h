@@ -3,7 +3,7 @@
 
 
 t_game	example_game(void); //TEMP
-void	init_game(t_game *game);
+void	init_system(t_game *game, t_init_data data);
 
 
 

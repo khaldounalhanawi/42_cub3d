@@ -12,7 +12,7 @@ MAIN_OBJS = $(MAIN_CFILES:.c=.o)
 
 # utils
 UTILS_DIR = ./src/utils
-UTILS_CFILES = $(UTILS_DIR)/init_game.c
+UTILS_CFILES = $(UTILS_DIR)/init_system.c
 UTILS_OBJS = $(UTILS_CFILES:.c=.o)
 
 # Libft
