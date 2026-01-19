@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 12:04:36 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/19 17:40:24 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/19 19:54:46 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,13 +110,13 @@ typedef struct s_game
 	void		*win;//REVIEW
 	t_player	player;//REVIEW
 	t_map		*map;//REVIEW
-	t_image		textures[4];
+	t_image		textures[4];// REVIEW
 	t_image		frame;
 	t_rayhit	*ray_hits;//REVIEW
 	int			screen_width; //REVIEW
 	int			screen_height; //REVIEW
-	int			floor_color;
-	int			ceiling_color;
+	int			floor_color;//REVIEW
+	int			ceiling_color;//REVIEW
 } t_game;
 
 #endif

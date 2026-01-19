@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 12:18:22 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/19 19:06:32 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/19 19:54:49 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,23 @@ void	load_textures(t_game *game, t_init_data data)
 	game->textures[3] = init_image (game, data.west_tex);
 }
 
+int	convert_arr_to_color(int input[])
+{
+	return (input[0] << 16 | input[1] << 8 | input[2]);
+}
+
+t_image	init_frame(t_game *game)
+{
+	t_image	frame;
+
+	frame.img = mlx_new_image (game->mlx, game->screen_width, game->screen_height);
+	frame.addr = (int *)mlx_get_data_addr (frame.img, &frame.bpp,
+				&frame.line_length, &frame.endian);
+	frame.width = WIDTH;
+	frame.height = HEIGHT;
+	return (frame);
+}
+
 void	init_system(t_game *game, t_init_data data)
 {
 	game->screen_height = HEIGHT;
@@ -80,8 +97,11 @@ void	init_system(t_game *game, t_init_data data)
 	game->ray_hits = NULL;
 	game->mlx = mlx_init ();
 	game->win = mlx_new_window (game->mlx, WIDTH, HEIGHT, "cub3D");
+	game->floor_color = convert_arr_to_color (data.floor_color);
+	game->ceiling_color = convert_arr_to_color (data.ceiling_color);
 	load_textures (game, data);
-	mlx_loop (game->mlx);
+	game->frame = init_frame (game);
+	mlx_loop (game->mlx); // TEMP
 	
 }
 
