@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 12:04:36 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/19 15:57:18 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/19 16:05:06 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,15 @@
 # endif
 # ifndef UNIT_SIZE
 #  define UNIT_SIZE 32
+# endif
+# ifndef SPEED
+#  define SPEED 3.0
+# endif
+# ifndef ROTATION
+#  define ROTATION 0.03
+# endif
+# ifndef FOV
+#  define FOV 0.66
 # endif
 
 typedef struct s_init_data
