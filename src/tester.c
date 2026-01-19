@@ -1,46 +1,17 @@
 #include "data_types.h"
+#include "libft.h"
 
 #include <stdlib.h>
 #include <string.h>
 
-static void	set_player(t_player *player, char spawn, int x, int y)
+t_init_data	example_data(void)
 {
-	player->pos_x = x + 0.5;
-	player->pos_y = y + 0.5;
-	player->move_speed = 0.05;
-	player->rot_speed = 0.03;
-	player->plane_x = 0.0;
-	player->plane_y = 0.66;
+	t_init_data	data;
+	t_map	*mymap;
 
-	if (spawn == 'N')
-	{
-		player->dir_x = -1.0;
-		player->dir_y = 0.0;
-	}
-	else if (spawn == 'S')
-	{
-		player->dir_x = 1.0;
-		player->dir_y = 0.0;
-	}
-	else if (spawn == 'E')
-	{
-		player->dir_x = 0.0;
-		player->dir_y = 1.0;
-		player->plane_x = 0.66;
-		player->plane_y = 0.0;
-	}
-	else if (spawn == 'W')
-	{
-		player->dir_x = 0.0;
-		player->dir_y = -1.0;
-		player->plane_x = -0.66;
-		player->plane_y = 0.0;
-	}
-}
+	mymap = malloc (sizeof (t_map));
+	data.map = mymap;
 
-t_game	example_game(void)
-{
-	t_game	game;
 	const char *map_lines[] = {
 		"1111111111111111111111111",
 		"1000000000110000000000001",
@@ -69,35 +40,32 @@ t_game	example_game(void)
 		if (len > max_width)
 			max_width = len;
 	}
-	game.map.height = i;
-	game.map.width = max_width;
+	data.map->height = i;
+	data.map->width = max_width;
 
 	// Allocate and copy rows
-	game.map.grid = malloc(sizeof(char *) * game.map.height);
-	for (i = 0; i < game.map.height; i++)
+	data.map->grid = malloc(sizeof(char *) * data.map->height);
+	for (i = 0; i < data.map->height; i++)
 	{
-		game.map.grid[i] = strdup(map_lines[i]);
-		// Detect player spawn
-		char *p = strpbrk(map_lines[i], "NSEW");
-		if (p)
-			set_player(&game.player, *p, p - map_lines[i], i);
+		data.map->grid[i] = strdup(map_lines[i]);
 	}
 
-	// Screen size
-	game.screen_width = 800;
-	game.screen_height = 600;
+	data.north_tex = ft_strdup ("./textures/North.xpm");
+	data.south_tex = ft_strdup ("./textures/South.xpm");
+	data.east_tex = ft_strdup ("./textures/East.xpm");
+	data.west_tex = ft_strdup ("./textures/West.xpm");
 
-	// Floor & ceiling
-	game.floor_color = (220 << 16) | (100 << 8) | 0; // F 220,100,0
-	game.ceiling_color = (225 << 16) | (30 << 8) | 0; // C 225,30,0
+	data.ceiling_color[0] = 220;
+	data.ceiling_color[1] = 100;
+	data.ceiling_color[2] = 0;
 
-	// Textures placeholder
-	for (i = 0; i < 4; i++)
-		game.textures[i].img = NULL;
+	data.floor_color[0] = 225;
+	data.floor_color[1] = 30;
+	data.floor_color[2] = 0;
 
-	game.mlx = NULL;
-	game.win = NULL;
-	game.ray_hits = NULL;
+	data.player_x = 5;
+	data.player_y = 5;
+	data.player_dir = 'N';
 
-	return game;
+	return data;
 }
