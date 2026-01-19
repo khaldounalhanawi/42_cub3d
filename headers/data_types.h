@@ -6,12 +6,39 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 12:04:36 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/16 16:13:47 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/19 13:39:36 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DATA_TYPES_H
 # define DATA_TYPES_H
+
+# ifndef WIDTH
+#  define WIDTH 1920
+# endif
+# ifndef HEIGHT
+#  define HEIGHT 1080
+# endif
+# ifndef TEXTURE_DIM
+#  define TEXTURE_DIM 64
+# endif
+# ifndef UNIT_SIZE
+#  define UNIT_SIZE 32
+# endif
+
+typedef struct s_init_data
+{
+	char	*north_tex;
+	char	*south_tex;
+	char	*west_tex;
+	char	*east_tex;
+	int		floor_color[3];
+	int		ceiling_color[3];
+	t_map	map;
+	int		player_x;
+	int		player_y;
+	char	player_dir;
+} t_init_data;
 
 typedef struct s_map
 {
@@ -77,10 +104,11 @@ typedef struct s_game
 	t_image		textures[4];
 	t_image		frame;
 	t_rayhit	*ray_hits;
-	int			screen_width;
-	int			screen_height;
+	int			screen_width; //
+	int			screen_height; //
 	int			floor_color;
 	int			ceiling_color;
 } t_game;
 
 #endif
+
