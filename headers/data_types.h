@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 12:04:36 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/16 16:13:47 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/19 11:53:09 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,3 +84,4 @@ typedef struct s_game
 } t_game;
 
 #endif
+
