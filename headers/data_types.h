@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 12:04:36 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/19 13:29:03 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/19 15:51:09 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,15 @@
 # ifndef UNIT_SIZE
 #  define UNIT_SIZE 32
 # endif
+# ifndef SPEED
+#  define SPEED 3.0
+# endif
+# ifndef ROTATION
+#  define ROTATION 0.03
+# endif
+# ifndef FOV
+#  define FOV 0.66
+# endif
 
 typedef struct s_init_data
 {
@@ -34,7 +43,7 @@ typedef struct s_init_data
 	char	*east_tex;
 	int		floor_color[3];
 	int		ceiling_color[3];
-	t_map	map;
+	t_map	*map;
 	int		player_x;
 	int		player_y;
 	char	player_dir;
@@ -99,13 +108,13 @@ typedef struct s_game
 {
 	void		*mlx;
 	void		*win;
-	t_player	player;
-	t_map		map;
+	t_player	player;//REVIEW
+	t_map		*map;//REVIEW
 	t_image		textures[4];
 	t_image		frame;
 	t_rayhit	*ray_hits;
-	int			screen_width;
-	int			screen_height;
+	int			screen_width; //REVIEW
+	int			screen_height; //REVIEW
 	int			floor_color;
 	int			ceiling_color;
 } t_game;
