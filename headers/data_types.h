@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 12:04:36 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/19 15:51:09 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/19 17:40:24 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 # define DATA_TYPES_H
 
 # ifndef WIDTH
-#  define WIDTH 1920
+#  define WIDTH 800
 # endif
 # ifndef HEIGHT
-#  define HEIGHT 1080
+#  define HEIGHT 600
 # endif
 # ifndef TEXTURE_DIM
 #  define TEXTURE_DIM 64
@@ -35,6 +35,13 @@
 #  define FOV 0.66
 # endif
 
+typedef struct s_map
+{
+	int		width;
+	int		height;
+	char	**grid;
+} t_map;
+
 typedef struct s_init_data
 {
 	char	*north_tex;
@@ -48,13 +55,6 @@ typedef struct s_init_data
 	int		player_y;
 	char	player_dir;
 } t_init_data;
-
-typedef struct s_map
-{
-	int		width;
-	int		height;
-	char	**grid;
-} t_map;
 
 typedef struct s_player
 {
@@ -106,13 +106,13 @@ typedef struct s_image
 
 typedef struct s_game
 {
-	void		*mlx;
-	void		*win;
+	void		*mlx;//REVIEW
+	void		*win;//REVIEW
 	t_player	player;//REVIEW
 	t_map		*map;//REVIEW
 	t_image		textures[4];
 	t_image		frame;
-	t_rayhit	*ray_hits;
+	t_rayhit	*ray_hits;//REVIEW
 	int			screen_width; //REVIEW
 	int			screen_height; //REVIEW
 	int			floor_color;

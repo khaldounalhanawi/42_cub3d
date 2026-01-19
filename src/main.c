@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 17:29:54 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/19 15:35:32 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/19 16:43:48 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int main(int argc, char **argv)
 	t_game		game;
 	t_init_data data;
 
+	data.map = NULL;
 	// if (argc != 2)
 	// 	exit_text ("Wrong count of arguments\n");
 	// parse_input (&data, argv[1]);

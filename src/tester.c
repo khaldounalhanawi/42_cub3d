@@ -41,6 +41,14 @@ static void	set_player(t_player *player, char spawn, int x, int y)
 t_game	example_game(void)
 {
 	t_game	game;
+	t_map	mymap;
+
+	mymap.grid = NULL;
+	mymap.height = 5;
+	mymap.width = 5;
+	game.map = &mymap;
+
+
 	const char *map_lines[] = {
 		"1111111111111111111111111",
 		"1000000000110000000000001",
@@ -69,14 +77,14 @@ t_game	example_game(void)
 		if (len > max_width)
 			max_width = len;
 	}
-	game.map.height = i;
-	game.map.width = max_width;
+	game.map->height = i;
+	game.map->width = max_width;
 
 	// Allocate and copy rows
-	game.map.grid = malloc(sizeof(char *) * game.map.height);
-	for (i = 0; i < game.map.height; i++)
+	game.map->grid = malloc(sizeof(char *) * game.map->height);
+	for (i = 0; i < game.map->height; i++)
 	{
-		game.map.grid[i] = strdup(map_lines[i]);
+		game.map->grid[i] = strdup(map_lines[i]);
 		// Detect player spawn
 		char *p = strpbrk(map_lines[i], "NSEW");
 		if (p)

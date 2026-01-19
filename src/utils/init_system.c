@@ -6,11 +6,12 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 12:18:22 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/19 15:56:04 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/19 17:33:09 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "data_types.h"
+#include "mlx.h"
 #include <stdio.h>
 
 void	set_player_dir(t_game *game, char c)
@@ -55,7 +56,10 @@ void	init_system(t_game *game, t_init_data data)
 	init_player (game, data);
 	game->map = data.map;
 	data.map = NULL;
-	
+	game->ray_hits = NULL;
+	game->mlx = mlx_init ();
+	game->win = mlx_new_window (game->mlx, WIDTH, HEIGHT, "cub3D");
+	mlx_loop (game->mlx);
 	
 }
 
