@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 17:29:54 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/16 17:49:23 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/19 11:22:48 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,8 @@ int main(int argc, char **argv)
 	// set_hooks (&game);
 	// mlx_loop (game.mlx);
 	// cleanup (&game);
+
+	(void) argc;
+	(void) argv;
 	return (0);
 }
