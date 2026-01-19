@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 12:18:22 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/19 17:33:09 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/19 19:06:32 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,27 @@ void	init_player(t_game *game, t_init_data data)
 	game->player.rot_speed = ROTATION;
 }
 
+t_image	init_image (t_game *game, char *address)
+{
+	t_image	image;
+
+	image.img = mlx_xpm_file_to_image (game->mlx, address,
+								&image.width, &image.height);
+	// if (!image.img)
+	//	clean_exit
+	image.addr = (int *)mlx_get_data_addr (image.img, &image.bpp,
+								&image.line_length, &image.endian);
+	return (image);
+}
+
+void	load_textures(t_game *game, t_init_data data)
+{
+	game->textures[0] = init_image (game, data.north_tex);
+	game->textures[1] = init_image (game, data.south_tex);
+	game->textures[2] = init_image (game, data.east_tex);
+	game->textures[3] = init_image (game, data.west_tex);
+}
+
 void	init_system(t_game *game, t_init_data data)
 {
 	game->screen_height = HEIGHT;
@@ -59,6 +80,7 @@ void	init_system(t_game *game, t_init_data data)
 	game->ray_hits = NULL;
 	game->mlx = mlx_init ();
 	game->win = mlx_new_window (game->mlx, WIDTH, HEIGHT, "cub3D");
+	load_textures (game, data);
 	mlx_loop (game->mlx);
 	
 }
