@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 12:04:36 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/19 13:39:36 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/19 15:57:18 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_init_data
 	char	*east_tex;
 	int		floor_color[3];
 	int		ceiling_color[3];
-	t_map	map;
+	t_map	*map;
 	int		player_x;
 	int		player_y;
 	char	player_dir;
@@ -100,7 +100,7 @@ typedef struct s_game
 	void		*mlx;
 	void		*win;
 	t_player	player;
-	t_map		map;
+	t_map		*map;
 	t_image		textures[4];
 	t_image		frame;
 	t_rayhit	*ray_hits;
