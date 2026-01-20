@@ -14,7 +14,10 @@ MAIN_OBJS = $(MAIN_CFILES:.c=.o)
 
 # utils
 UTILS_DIR = ./src/utils
-UTILS_CFILES = $(UTILS_DIR)/init_system.c
+UTILS_HEADER = ./src/utils/local_utils.h
+UTILS_CFILES = $(UTILS_DIR)/clear_data.c \
+				$(UTILS_DIR)/init_player.c \
+				$(UTILS_DIR)/init_system.c
 UTILS_OBJS = $(UTILS_CFILES:.c=.o)
 
 # Libft
@@ -24,14 +27,14 @@ LIBFT = $(LIBFT_DIR)/libft.a
 
 all : $(NAME)
 
-$(NAME) : $(MAIN_OBJS) $(LIBFT) $(UTILS_OBJS)
+$(NAME) : $(MAIN_OBJS) $(LIBFT) $(UTILS_OBJS) $(UTILS_HEADER)
 	cc $(FLAGS) $(MAIN_OBJS) $(UTILS_OBJS) $(LDFLAGS) $(MLX_L) -o $(NAME)
 
 $(MAIN_DIR)/%.o: $(MAIN_DIR)/%.c $(INCLUDE_PATH)/$(TYPES) $(INCLUDE_PATH)/main.h
 	cc $(FLAGS) -I $(INCLUDE_PATH) -I $(LIBFT_HEADER_DIR) -I $(INCLUDE_MLX) -c $< -o $@
 
-$(UTILS_DIR)/%.o: $(UTILS_DIR)/%.c $(INCLUDE_PATH)/$(TYPES)
-	cc $(FLAGS) -I $(INCLUDE_PATH) -I $(INCLUDE_MLX) -I $(LIBFT_HEADER_DIR) -c $< -o $@
+$(UTILS_DIR)/%.o: $(UTILS_DIR)/%.c $(INCLUDE_PATH)/$(TYPES) $(UTILS_HEADER)
+	cc $(FLAGS) -I $(INCLUDE_PATH) -I $(UTILS_DIR) -I $(INCLUDE_MLX) -I $(LIBFT_HEADER_DIR) -c $< -o $@
 
 $(LIBFT) :
 	$(MAKE) -C $(LIBFT_DIR)
