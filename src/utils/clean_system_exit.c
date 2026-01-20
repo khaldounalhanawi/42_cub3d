@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 12:18:22 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/20 14:04:05 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/20 15:20:19 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,66 @@
 #include "libft.h"
 #include <stdlib.h>
 
-void	clean_system_exit(t_game *game, t_init_data data, int code, char *msg)
+static void	clear_map(t_map *map)
 {
 	int	i;
 
-	if (code >= 1)
-		clear_data (data);
-	if (code >= 2)
+	if (!map)
+		return ;
+	i = -1;
+	if (map->grid)
 	{
-		i = -1;
-		while (++i < 4)
+		while (++i < map->height)
+			free (map->grid[i]);
+		free (map->grid);
+	}
+}
+
+void	clear_data(t_init_data data)
+{
+	if (data.north_tex)
+		free (data.north_tex);
+	if (data.south_tex)
+		free (data.south_tex);
+	if (data.east_tex)
+		free (data.east_tex);
+	if (data.west_tex)
+		free (data.west_tex);
+	if (data.map)
+	{
+		clear_map (data.map);
+		free (data.map);
+	}
+}
+
+static void	clear_images(t_game *game)
+{
+	int	i;
+
+	i = -1;
+	while (++i < 4)
+	{
+		if (game->textures[i].img)
 			mlx_destroy_image (game->mlx, game->textures[i].img);
 	}
-	if (code >= 3)
+}
+
+void	clean_system_exit(t_game *game, t_init_data data, int code, char *msg)
+{
+	if (code >= DATA)
+	{
+		clear_data (data);
+		clear_map (game->map);
+		free (game->map);
+	}
+	if (code >= IMAGES)
+		clear_images (game);
+	if (code >= FULL)
 	{
 		mlx_destroy_image (game->mlx, game->frame.img);
 		mlx_destroy_window (game->mlx, game->win);
 	}
 	if (msg)
-	{
 		ft_putstr_fd (msg, 2);
-		exit (1);
-	}
 	exit (0);
 }

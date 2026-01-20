@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 12:18:22 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/20 14:06:29 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/20 14:59:27 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@ t_image	init_image(t_game *game, char *address)
 {
 	t_image	image;
 
+	image.img = NULL;
+	image.addr = NULL;
+	image.width = 0;
+	image.height = 0;
 	image.img = mlx_xpm_file_to_image (game->mlx, address,
 			&image.width, &image.height);
 	if (!image.img)
@@ -39,7 +43,7 @@ void	load_textures(t_game *game, t_init_data data)
 	while (i < 4)
 	{
 		if (!game->textures[i].img)
-			clean_system_exit (game, data, 2, "image failed to load\n");
+			clean_system_exit (game, data, IMAGES, "image failed to load\n");
 		i ++;
 	}
 }
@@ -53,6 +57,8 @@ t_image	init_frame(t_game *game)
 {
 	t_image	frame;
 
+	frame.img = NULL;
+	frame.addr = NULL;
 	frame.img = mlx_new_image (game->mlx,
 			game->screen_width, game->screen_height);
 	if (!frame.img)
@@ -76,12 +82,12 @@ void	init_system(t_game *game, t_init_data data)
 	game->ceiling_color = convert_arr_to_color (data.ceiling_color);
 	game->mlx = mlx_init ();
 	if (!game->mlx)
-		clean_system_exit (game, data, 1, "couldn't initiate mlx\n");
+		clean_system_exit (game, data, DATA, "couldn't initiate mlx\n");
 	game->win = mlx_new_window (game->mlx, WIDTH, HEIGHT, "cub3D");
 	if (!game->win)
-		clean_system_exit (game, data, 1, "couldn't create window\n");
+		clean_system_exit (game, data, DATA, "couldn't create window\n");
 	load_textures (game, data);
 	game->frame = init_frame (game);
 	if (!game->frame.img)
-		clean_system_exit (game, data, 2, "couldn't initiate frame\n");
+		clean_system_exit (game, data, IMAGES, "couldn't initiate frame\n");
 }
