@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 12:18:22 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/20 12:53:48 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/20 14:07:32 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,25 @@
 static void	get_player_dir(t_game *game, char c)
 {
 	if (c == 'N')
-		{
-			game->player.dir_x = 0;
-			game->player.dir_y = -1;
-		}
+	{
+		game->player.dir_x = 0;
+		game->player.dir_y = -1;
+	}
 	else if (c == 'S')
-		{
-			game->player.dir_x = 0;
-			game->player.dir_y = 1;
-		}
+	{
+		game->player.dir_x = 0;
+		game->player.dir_y = 1;
+	}
 	else if (c == 'E')
-		{
-			game->player.dir_x = 1;
-			game->player.dir_y = 0;
-		}
+	{
+		game->player.dir_x = 1;
+		game->player.dir_y = 0;
+	}
 	else if (c == 'W')
-		{
-			game->player.dir_x = -1;
-			game->player.dir_y = 0;
-		}
+	{
+		game->player.dir_x = -1;
+		game->player.dir_y = 0;
+	}
 }
 
 void	init_player(t_game *game, t_init_data data)
@@ -42,7 +42,7 @@ void	init_player(t_game *game, t_init_data data)
 	game->player.pos_y = (data.player_y + 0.5) * UNIT_SIZE;
 	get_player_dir (game, data.player_dir);
 	game->player.plane_x = -game->player.dir_y * FOV;
-	game->player.plane_y =  game->player.dir_x * FOV;
+	game->player.plane_y = game->player.dir_x * FOV;
 	game->player.move_speed = SPEED;
 	game->player.rot_speed = ROTATION;
 }

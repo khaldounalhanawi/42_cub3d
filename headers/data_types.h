@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 12:04:36 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/20 12:39:38 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/20 14:10:38 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,12 @@
 #  define FOV 0.66
 # endif
 
-enum {
-	north, south, east, west
+enum
+{
+	north,
+	south,
+	east,
+	west
 };
 
 typedef struct s_map
@@ -44,7 +48,7 @@ typedef struct s_map
 	int		width;
 	int		height;
 	char	**grid;
-} t_map;
+}	t_map;
 
 typedef struct s_init_data
 {
@@ -58,7 +62,7 @@ typedef struct s_init_data
 	int		player_x;
 	int		player_y;
 	char	player_dir;
-} t_init_data;
+}	t_init_data;
 
 typedef struct s_player
 {
@@ -70,7 +74,7 @@ typedef struct s_player
 	double	plane_y;
 	double	move_speed;
 	double	rot_speed;
-} t_player;
+}	t_player;
 
 // raycaster helper, revisit
 typedef struct s_raycast
@@ -87,7 +91,7 @@ typedef struct s_raycast
 	int		step_y;
 	int		hit;
 	int		side;
-} t_raycast;
+}	t_raycast;
 
 typedef struct s_rayhit
 {
@@ -95,7 +99,7 @@ typedef struct s_rayhit
 	int		side;
 	int		wall_dir;
 	double	wall_hit;
-} t_rayhit;
+}	t_rayhit;
 
 typedef struct s_image
 {
@@ -106,7 +110,7 @@ typedef struct s_image
 	int		line_length;
 	int		bpp;
 	int		endian;
-} t_image;
+}	t_image;
 
 typedef struct s_game
 {
@@ -121,7 +125,6 @@ typedef struct s_game
 	int			screen_height;
 	int			floor_color;
 	int			ceiling_color;
-} t_game;
+}	t_game;
 
 #endif
-

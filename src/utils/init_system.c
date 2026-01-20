@@ -6,26 +6,24 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 12:18:22 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/20 13:43:04 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/20 14:06:29 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "local_utils.h"
 #include "mlx.h"
-#include <stdio.h> // TEMP
+#include <stdio.h>
 
-void	clean_system_exit(t_game *game, t_init_data data, int code, char *msg);
-
-t_image	init_image (t_game *game, char *address)
+t_image	init_image(t_game *game, char *address)
 {
 	t_image	image;
 
 	image.img = mlx_xpm_file_to_image (game->mlx, address,
-								&image.width, &image.height);
+			&image.width, &image.height);
 	if (!image.img)
 		return (image);
 	image.addr = (int *)mlx_get_data_addr (image.img, &image.bpp,
-								&image.line_length, &image.endian);
+			&image.line_length, &image.endian);
 	return (image);
 }
 
@@ -55,11 +53,12 @@ t_image	init_frame(t_game *game)
 {
 	t_image	frame;
 
-	frame.img = mlx_new_image (game->mlx, game->screen_width, game->screen_height);
+	frame.img = mlx_new_image (game->mlx,
+			game->screen_width, game->screen_height);
 	if (!frame.img)
 		return (frame);
 	frame.addr = (int *)mlx_get_data_addr (frame.img, &frame.bpp,
-				&frame.line_length, &frame.endian);
+			&frame.line_length, &frame.endian);
 	frame.width = WIDTH;
 	frame.height = HEIGHT;
 	return (frame);
@@ -85,32 +84,4 @@ void	init_system(t_game *game, t_init_data data)
 	game->frame = init_frame (game);
 	if (!game->frame.img)
 		clean_system_exit (game, data, 2, "couldn't initiate frame\n");
-}
-
-#include "libft.h"
-#include "stdlib.h"
-
-void	clean_system_exit(t_game *game, t_init_data data, int code, char *msg)
-{
-	int	i;
-
-	if (code >= 1)
-		clear_data (data);
-	if (code >= 2)
-	{
-		i = -1;
-		while (++i < 4)
-			mlx_destroy_image (game->mlx, game->textures[i].img);
-	}
-	if (code >= 3)
-	{
-		mlx_destroy_image (game->mlx, game->frame.img);
-		mlx_destroy_window (game->mlx, game->win);
-	}
-	if (msg)
-	{
-		ft_putstr_fd (msg, 2);
-		exit (1);
-	}
-	exit (0);
 }
