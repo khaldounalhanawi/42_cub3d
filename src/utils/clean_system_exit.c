@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 12:18:22 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/20 18:16:30 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/20 19:11:03 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ static void	clear_map(t_map *map)
 	if (map->grid)
 	{
 		while (++i < map->height)
-			free (map->grid[i]);
+		{
+			if (map->grid[i])
+				free (map->grid[i]);
+		}
 		free (map->grid);
 	}
 }
@@ -66,7 +69,8 @@ void	clear_data_exit(t_init_data data, char *msg)
 	exit (1);
 }
 
-static void	clear_images(t_game *game)
+// free bbpp?
+static void	clear_textures(t_game *game)
 {
 	int	i;
 
@@ -78,16 +82,15 @@ static void	clear_images(t_game *game)
 	}
 }
 
-//	for linux mlx_destroy_display(game->mlx) ??
 void	clean_system_exit(t_game *game, int code, char *msg)
 {
 	if (code >= IMAGES)
-		clear_images (game);
+		clear_textures (game);
 	if (code >= FULL)
 	{
+		clear_map (game->map);
 		mlx_destroy_image (game->mlx, game->frame.img);
 		mlx_destroy_window (game->mlx, game->win);
-		clear_map (game->map);
 	}
 	if (msg)
 		ft_putstr_fd (msg, 2);

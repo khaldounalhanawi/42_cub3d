@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 17:29:54 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/20 18:26:52 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/20 19:01:20 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ int	hook_close_window(int keycode, t_game *game)
 {
 	if (keycode == 53)
 	{
-		mlx_destroy_window (game->mlx, game->win);
-		exit (0);
+		//mlx_destroy_window (game->mlx, game->win);
+		clean_system_exit (game, FULL, NULL);
+		//exit (0);
 	}
 	return (0);
 }
