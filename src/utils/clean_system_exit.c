@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 12:18:22 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/20 19:11:03 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/20 19:29:20 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,15 @@ static void	clear_textures(t_game *game)
 	}
 }
 
+// try on Linux>>
+//		clear_map (game->map);
+//		free (game->map);
 void	clean_system_exit(t_game *game, int code, char *msg)
 {
 	if (code >= IMAGES)
 		clear_textures (game);
 	if (code >= FULL)
 	{
-		clear_map (game->map);
 		mlx_destroy_image (game->mlx, game->frame.img);
 		mlx_destroy_window (game->mlx, game->win);
 	}
