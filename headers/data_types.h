@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 12:04:36 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/20 14:59:37 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/20 17:44:09 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,7 @@ enum
 
 enum e_cleanup_code
 {
-	DATA = 1,
-	IMAGES,
+	IMAGES = 1,
 	FULL
 };
 

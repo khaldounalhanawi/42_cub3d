@@ -6,12 +6,13 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 12:18:22 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/20 14:59:27 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/20 18:18:58 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "local_utils.h"
 #include "mlx.h"
+#include <stdlib.h>
 #include <stdio.h>
 
 t_image	init_image(t_game *game, char *address)
@@ -43,7 +44,7 @@ void	load_textures(t_game *game, t_init_data data)
 	while (i < 4)
 	{
 		if (!game->textures[i].img)
-			clean_system_exit (game, data, IMAGES, "image failed to load\n");
+			clean_system_exit (game, IMAGES, "image failed to load\n");
 		i ++;
 	}
 }
@@ -75,19 +76,19 @@ void	init_system(t_game *game, t_init_data data)
 	game->screen_height = HEIGHT;
 	game->screen_width = WIDTH;
 	init_player (game, data);
-	game->map = data.map;
-	data.map = NULL;
 	game->ray_hits = NULL;
 	game->floor_color = convert_arr_to_color (data.floor_color);
 	game->ceiling_color = convert_arr_to_color (data.ceiling_color);
 	game->mlx = mlx_init ();
 	if (!game->mlx)
-		clean_system_exit (game, data, DATA, "couldn't initiate mlx\n");
+		clear_data_exit (data, "couldn't initiate mlx\n");
 	game->win = mlx_new_window (game->mlx, WIDTH, HEIGHT, "cub3D");
 	if (!game->win)
-		clean_system_exit (game, data, DATA, "couldn't create window\n");
+		clear_data_exit (data, "couldn't create window\n");
 	load_textures (game, data);
 	game->frame = init_frame (game);
 	if (!game->frame.img)
-		clean_system_exit (game, data, IMAGES, "couldn't initiate frame\n");
+		clean_system_exit (game, IMAGES, "couldn't initiate frame\n");
+	game->map = data.map;
+	data.map = NULL;
 }

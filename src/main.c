@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 17:29:54 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/20 17:31:16 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/20 18:26:52 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,6 @@ int main(int argc, char **argv)
 	mlx_put_image_to_window (game.mlx, game.win, game.textures[north].img, 0, 0); // TEMP
 	mlx_key_hook(game.win, hook_close_window, &game);
 	mlx_loop (game.mlx);
-	clean_system_exit (&game, data, FULL, NULL);
+	clean_system_exit (&game, FULL, NULL);
 	return (0);
 }
