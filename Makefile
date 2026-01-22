@@ -16,6 +16,7 @@ MAIN_OBJS = $(MAIN_CFILES:.c=.o)
 UTILS_DIR = ./src/utils
 UTILS_HEADER = ./src/utils/local_utils.h
 UTILS_CFILES = 	$(UTILS_DIR)/clean_system_exit.c \
+				$(UTILS_DIR)/init_images.c \
 				$(UTILS_DIR)/init_player.c \
 				$(UTILS_DIR)/init_system.c
 UTILS_OBJS = $(UTILS_CFILES:.c=.o)

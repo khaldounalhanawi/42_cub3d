@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 11:16:39 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/20 17:50:48 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/22 12:30:52 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,9 @@ void	init_player(t_game *game, t_init_data data);
 void	clear_data(t_init_data data);
 void	clear_data_exit(t_init_data data, char *msg);
 void	clean_system_exit(t_game *game, int code, char *msg);
+
+// init_images.c
+void	load_textures(t_game *game, t_init_data data);
+t_image	init_frame(t_game *game);
 
 #endif
