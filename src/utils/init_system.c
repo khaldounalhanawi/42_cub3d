@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 12:18:22 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/22 12:33:42 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/22 17:06:51 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,4 @@ void	init_system(t_game *game, t_init_data data)
 	if (!game->frame.img)
 		clean_system_exit (game, IMAGES, "couldn't initiate frame\n");
 	game->map = data.map;
-	data.map = NULL;
 }

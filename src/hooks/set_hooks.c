@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 17:29:54 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/22 16:16:06 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/22 18:11:35 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@ void	update_position(t_game *game)
 		move_forward (game);
 	if (game->input.backward)
 		move_backward (game);
+	if (game->input.left)
+		move_left (game);
+	if (game->input.right)
+		move_right (game);
 }
 
 void	update_frame(t_game *game)

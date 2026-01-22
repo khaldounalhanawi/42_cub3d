@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 16:00:18 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/22 16:07:35 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/22 18:12:07 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,7 @@ int	key_release(int key, t_game *game);
 int		close_window(t_game *game);
 void	move_forward(t_game *game);
 void	move_backward(t_game *game);
+void	move_right(t_game *game);
+void	move_left(t_game *game);
 
 #endif
