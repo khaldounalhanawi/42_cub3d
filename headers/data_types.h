@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 12:04:36 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/20 17:44:09 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/22 12:28:20 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,14 @@ typedef struct s_image
 	int		endian;
 }	t_image;
 
+typedef struct s_input
+{
+	int	forward;
+	int	backward;
+	int	right;
+	int	left;
+}	t_input;
+
 typedef struct s_game
 {
 	void		*mlx;
@@ -131,6 +139,7 @@ typedef struct s_game
 	int			screen_height;
 	int			floor_color;
 	int			ceiling_color;
+	t_input		input;
 }	t_game;
 
 #endif

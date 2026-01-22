@@ -6,12 +6,13 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 17:29:54 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/21 17:16:39 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/22 12:12:50 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "data_types.h"
 #include "main.h"
+#include "keyboard_keys.h"
 #include "mlx.h"
 #include <stdio.h>
 
@@ -27,7 +28,7 @@ int	close_window(t_game *game)
 
 int	hook_keyboard(int keycode, t_game *game)
 {
-	if (keycode == 53)
+	if (keycode == ESC)
 		close_window (game);
 	return (1);
 }

@@ -9,6 +9,8 @@ MLX_L = -L ./libs/minilibx_opengl_20191021 -lmlx -lm -framework OpenGL -framewor
 
 # main
 MAIN_DIR = ./src
+MAIN_HEADER = $(INCLUDE_PATH)/keyboard_keys.h \
+				$(INCLUDE_PATH)/main.h
 MAIN_CFILES = $(MAIN_DIR)/main.c $(MAIN_DIR)/tester.c
 MAIN_OBJS = $(MAIN_CFILES:.c=.o)
 
@@ -16,6 +18,7 @@ MAIN_OBJS = $(MAIN_CFILES:.c=.o)
 UTILS_DIR = ./src/utils
 UTILS_HEADER = ./src/utils/local_utils.h
 UTILS_CFILES = 	$(UTILS_DIR)/clean_system_exit.c \
+				$(UTILS_DIR)/init_images.c \
 				$(UTILS_DIR)/init_player.c \
 				$(UTILS_DIR)/init_system.c
 UTILS_OBJS = $(UTILS_CFILES:.c=.o)
@@ -30,7 +33,7 @@ all : $(NAME)
 $(NAME) : $(MAIN_OBJS) $(LIBFT) $(UTILS_OBJS) $(UTILS_HEADER)
 	cc $(FLAGS) $(MAIN_OBJS) $(UTILS_OBJS) $(LDFLAGS) $(MLX_L) -o $(NAME)
 
-$(MAIN_DIR)/%.o: $(MAIN_DIR)/%.c $(INCLUDE_PATH)/$(TYPES) $(INCLUDE_PATH)/main.h
+$(MAIN_DIR)/%.o: $(MAIN_DIR)/%.c $(INCLUDE_PATH)/$(TYPES) $(MAIN_HEADER)
 	cc $(FLAGS) -I $(INCLUDE_PATH) -I $(LIBFT_HEADER_DIR) -I $(INCLUDE_MLX) -c $< -o $@
 
 $(UTILS_DIR)/%.o: $(UTILS_DIR)/%.c $(INCLUDE_PATH)/$(TYPES) $(UTILS_HEADER)
