@@ -23,6 +23,12 @@ UTILS_CFILES = 	$(UTILS_DIR)/clean_system_exit.c \
 				$(UTILS_DIR)/init_system.c
 UTILS_OBJS = $(UTILS_CFILES:.c=.o)
 
+# hooks
+HOOKS_DIR = ./src/hooks
+HOOKS_HEADER = $(HOOKS_DIR)/local_hooks.h
+HOOKS_CFILES = 	$(HOOKS_DIR)/set_hooks.c
+HOOKS_OBJS = $(HOOKS_CFILES:.c=.o)
+
 # Libft
 LIBFT_DIR = $(LIBRARYS)/Libft
 LIBFT_HEADER_DIR = $(LIBFT_DIR)/include
@@ -30,8 +36,8 @@ LIBFT = $(LIBFT_DIR)/libft.a
 
 all : $(NAME)
 
-$(NAME) : $(MAIN_OBJS) $(LIBFT) $(UTILS_OBJS) $(UTILS_HEADER)
-	cc $(FLAGS) $(MAIN_OBJS) $(UTILS_OBJS) $(LDFLAGS) $(MLX_L) -o $(NAME)
+$(NAME) : $(MAIN_OBJS) $(LIBFT) $(UTILS_OBJS) $(HOOKS_OBJS) $(HOOKS_HEADER) $(UTILS_HEADER)
+	cc $(FLAGS) $(MAIN_OBJS) $(UTILS_OBJS) $(HOOKS_OBJS) $(LDFLAGS) $(MLX_L) -o $(NAME)
 
 $(MAIN_DIR)/%.o: $(MAIN_DIR)/%.c $(INCLUDE_PATH)/$(TYPES) $(MAIN_HEADER)
 	cc $(FLAGS) -I $(INCLUDE_PATH) -I $(LIBFT_HEADER_DIR) -I $(INCLUDE_MLX) -c $< -o $@
@@ -39,12 +45,16 @@ $(MAIN_DIR)/%.o: $(MAIN_DIR)/%.c $(INCLUDE_PATH)/$(TYPES) $(MAIN_HEADER)
 $(UTILS_DIR)/%.o: $(UTILS_DIR)/%.c $(INCLUDE_PATH)/$(TYPES) $(UTILS_HEADER)
 	cc $(FLAGS) -I $(INCLUDE_PATH) -I $(UTILS_DIR) -I $(INCLUDE_MLX) -I $(LIBFT_HEADER_DIR) -c $< -o $@
 
+$(HOOKS_DIR)/%.o: $(HOOKS_DIR)/%.c $(INCLUDE_PATH)/$(TYPES) $(HOOKS_HEADER)
+	cc $(FLAGS) -I $(INCLUDE_PATH) -I $(HOOKS_DIR) -I $(INCLUDE_MLX) -I $(LIBFT_HEADER_DIR) -c $< -o $@
+
 $(LIBFT) :
 	$(MAKE) -C $(LIBFT_DIR)
 
 clean :
 	rm -rf $(MAIN_OBJS)
 	rm -rf $(UTILS_OBJS)
+	rm -rf $(HOOKS_OBJS)
 	$(MAKE) clean -C $(LIBFT_DIR)
 
 fclean : clean

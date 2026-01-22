@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 12:06:47 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/22 12:16:50 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/22 12:48:40 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 # define KEYBOARD_KEYS_H
 
 #define ESC 53
-#define A 0
-#define S 1
-#define D 2
-#define W 13
+#define KEY_A 0
+#define KEY_S 1
+#define KEY_D 2
+#define KEY_W 13
 
 #endif
