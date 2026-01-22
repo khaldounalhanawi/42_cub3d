@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 17:29:54 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/22 18:11:35 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/22 18:43:40 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <stdio.h>
 #include <unistd.h>
 
-void	my_mlx_pixel_put(t_image *frame, t_player a, int color)
+void	my_mlx_pixel_put(t_image *frame, t_player a, int color, int arrow_len)
 {
 	char	*target;
 
@@ -27,6 +27,15 @@ void	my_mlx_pixel_put(t_image *frame, t_player a, int color)
 	target = (char *)frame->addr + ((int)a.pos_y * (frame->line_length) + (int)a.pos_x
 			* (frame->bpp / 8));
 	*(int *)target = color;
+
+	while (arrow_len)
+	{
+		target = (char *)frame->addr
+			+ (int)(a.pos_y + (arrow_len * a.dir_y)) * (frame->line_length)
+			+ (int)(a.pos_x + (arrow_len * a.dir_x)) * (frame->bpp / 8);
+		*(int *)target = color;
+		arrow_len --;
+	}
 }
 
 void	update_position(t_game *game)
@@ -54,7 +63,7 @@ void	update_frame(t_game *game)
 		&new_frame.line_length, &new_frame.endian);
 	if (!new_frame.addr)
 		clean_system_exit (game, FULL, "@update_frame: failed to extract addr\n");
-	my_mlx_pixel_put (&new_frame, game->player, 0xff00ff);
+	my_mlx_pixel_put (&new_frame, game->player, 0xff00ff, 10);
 	game->frame = new_frame;
 	mlx_put_image_to_window (game->mlx, game->win, game->frame.img, 0, 0);
 	mlx_destroy_image (game->mlx, old_image_pointer);
