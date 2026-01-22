@@ -1,26 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   local_hooks.h                                      :+:      :+:    :+:   */
+/*   controls.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/22 16:00:18 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/22 16:07:35 by kalhanaw         ###   ########.fr       */
+/*   Created: 2026/01/16 17:29:54 by kalhanaw          #+#    #+#             */
+/*   Updated: 2026/01/22 16:08:50 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LOCAL_HOOKS_H
-# define LOCAL_HOOKS_H
 #include "data_types.h"
+#include "local_hooks.h"
+#include "keyboard_keys.h"
 
-// controls.c
-int	key_press(int key, t_game *game);
-int	key_release(int key, t_game *game);
+int	key_press(int key, t_game *game)
+{
+	if (key == ESC)
+		close_window (game);
+	if (key == KEY_W)
+		game->input.forward = 1;
+	if (key == KEY_S)
+		game->input.backward = 1;
+		return (0);
+}
 
-// actions.c
-int		close_window(t_game *game);
-void	move_forward(t_game *game);
-void	move_backward(t_game *game);
+int	key_release(int key, t_game *game)
+{
+	if (key == KEY_W)
+		game->input.forward = 0;
+	if (key == KEY_S)
+		game->input.backward = 0;
+	return (0);
+}
 
-#endif

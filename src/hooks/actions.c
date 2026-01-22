@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   local_hooks.h                                      :+:      :+:    :+:   */
+/*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/22 16:00:18 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/22 16:07:35 by kalhanaw         ###   ########.fr       */
+/*   Created: 2026/01/16 17:29:54 by kalhanaw          #+#    #+#             */
+/*   Updated: 2026/01/22 16:12:41 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LOCAL_HOOKS_H
-# define LOCAL_HOOKS_H
 #include "data_types.h"
+#include "local_hooks.h"
+#include "main.h"
+#include <unistd.h>
 
-// controls.c
-int	key_press(int key, t_game *game);
-int	key_release(int key, t_game *game);
+int	close_window(t_game *game)
+{
+	write (2, "Thank you for playing!\n", 24);
+	clean_system_exit (game, FULL, NULL);
+	return (1);
+}
 
-// actions.c
-int		close_window(t_game *game);
-void	move_forward(t_game *game);
-void	move_backward(t_game *game);
+void	move_forward(t_game *game)
+{
+	game->player.pos_y += SPEED;
+}
 
-#endif
+void	move_backward(t_game *game)
+{
+	game->player.pos_y -= SPEED;
+}
+
