@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_images.c                                      :+:      :+:    :+:   */
+/*   init_textures.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -14,7 +14,7 @@
 #include "mlx.h"
 #include <stdio.h>
 
-static t_image	init_image(t_game *game, char *address)
+static t_image	init_texture(t_game *game, char *address)
 {
 	t_image	image;
 
@@ -35,10 +35,10 @@ void	load_textures(t_game *game, t_init_data data)
 {
 	int	i;
 
-	game->textures[north] = init_image (game, data.north_tex);
-	game->textures[south] = init_image (game, data.south_tex);
-	game->textures[east] = init_image (game, data.east_tex);
-	game->textures[west] = init_image (game, data.west_tex);
+	game->textures[north] = init_texture (game, data.north_tex);
+	game->textures[south] = init_texture (game, data.south_tex);
+	game->textures[east] = init_texture (game, data.east_tex);
+	game->textures[west] = init_texture (game, data.west_tex);
 	i = 0;
 	while (i < 4)
 	{
