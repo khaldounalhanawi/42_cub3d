@@ -32,25 +32,25 @@ static void	parse_config_line(t_init_data *data, char *line)
 		exit_text("Error\nInvalid config\n");
 }
 
-static void	grow_mapbuf(t_mapbuf *mb)
+static void	grow_mapbuf(t_mapbuf *mapbuff)
 {
 	char	**new_lines;
 	int		new_cap;
 	int		i;
 
-	new_cap = mb->cap + 16;
+	new_cap = mapbuff->cap + 16;
 	new_lines = (char **)malloc(sizeof(char *) * new_cap);
 	if (!new_lines)
 		exit_text("Error\nMalloc failed\n");
 	i = 0;
-	while (i < mb->h)
+	while (i < mapbuff->h)
 	{
-		new_lines[i] = mb->lines[i];
+		new_lines[i] = mapbuff->lines[i];
 		i++;
 	}
-	free(mb->lines);
-	mb->lines = new_lines;
-	mb->cap = new_cap;
+	free(mapbuff->lines);
+	mapbuff->lines = new_lines;
+	mapbuff->cap = new_cap;
 }
 
 static int	len_nl(char *s)
@@ -63,21 +63,21 @@ static int	len_nl(char *s)
 	return (i);
 }
 
-static void	store_map_line(t_mapbuf *mb, char *line)
+static void	store_map_line(t_mapbuf *mapbuff, char *line)
 {
 	int		len;
 	char	*dup;
 
-	if (mb->h == mb->cap)
-		grow_mapbuf(mb);
+	if (mapbuff->h == mapbuff->cap)
+		grow_mapbuf(mapbuff);
 	dup = ft_strdup(line);
-	if (!dup)
-		exit_text("Error\nMalloc failed\n");
-	mb->lines[mb->h] = dup;
-	mb->h++;
+	if (!dup)   
+		exit_text("Error\nMalloc failed\n"); // free shit....mapbuf!
+	mapbuff->lines[mapbuff->h] = dup;
+	mapbuff->h++;
 	len = len_nl(dup);
-	if (len > mb->max_w)
-		mb->max_w = len;
+	if (len > mapbuff->max_w)
+		mapbuff->max_w = len;
 }
 
 void	parse_line(t_init_data *data, t_mapbuf *buf, char *line, int *in_map)
@@ -102,3 +102,5 @@ void	parse_line(t_init_data *data, t_mapbuf *buf, char *line, int *in_map)
 	}
 	exit_text("Error\nInvalid line\n");
 }
+
+

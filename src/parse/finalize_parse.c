@@ -83,7 +83,7 @@ static void	build_map(t_init_data *d, t_mapbuf *mb)
 
 void	finalize_parse(t_init_data *data, t_mapbuf *mb)
 {
-	check_required(data, mb);
+	check_required(data, mb);  // put it in validation funcion
 	build_map(data, mb);
 	free_mapbuf(mb);
 	find_player(data, data->map);

@@ -34,7 +34,8 @@ static void	handle_player_cell(t_init_data *d, t_map *m,
 		(*count)++;
 	}
 }
-
+// remove map since DATA has already map in it
+// naming of d=DATA
 void	find_player(t_init_data *d, t_map *m)
 {
 	int	x;

@@ -49,4 +49,6 @@ void	parse_input(t_init_data *data, char *path)
 	if (!in_map)
 		exit_text("Missing map\n");
 	finalize_parse(data, &mb);
+	// try to make all the important functions clear in the body,
+	
 }

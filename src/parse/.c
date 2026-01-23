@@ -55,7 +55,7 @@ void set_texture(char **dst, char *raw)
     path = trim_space_ends(raw);
     if (!path || path[0] == '\0')
         exit_text("Error\nEmpty texture path\n");
-    if (!ends_with(path, ".xpm"))   /// free shit
+    if (!ends_with(path, ".xpm"))
         exit_text("Error\nTexture must be .xpm\n");
     fd = open(path, O_RDONLY);
     if (fd < 0)
