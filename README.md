@@ -69,28 +69,28 @@
 ╔══════════════════════════════════════════════════════════════════════════╗
 ║  USER PRESSES KEY (W/A/S/D/Arrows)                                       ║
 ╠══════════════════════════════════════════════════════════════════════════╣
-║  'key_press'                     /* Sets game->input flags to 1 */       ║
+║  key_press()                     /* Sets game->input flags to 1 */       ║
 ╚══════════════════════════════════════════════════════════════════════════╝
 
 ╔══════════════════════════════════════════════════════════════════════════╗
 ║  USER RELEASES KEY                                                       ║
 ╠══════════════════════════════════════════════════════════════════════════╣
-║  'key_release'                   /* Sets game->input flags to 0 */       ║
+║  key_release()                   /* Sets game->input flags to 0 */       ║
 ╚══════════════════════════════════════════════════════════════════════════╝
 
 ╔══════════════════════════════════════════════════════════════════════════╗
 ║  USER CLOSES WINDOW (X button or ESC)                                    ║
 ╠══════════════════════════════════════════════════════════════════════════╣
-║  'close_window'                  /* Triggers cleanup and exit */         ║
-║    └── 'clean_system_exit'       /* Frees all resources and exits */     ║
+║  close_window()                  /* Triggers cleanup and exit */         ║
+║    └── clean_system_exit()       /* Frees all resources and exits */     ║
 ╚══════════════════════════════════════════════════════════════════════════╝
 
 ╔══════════════════════════════════════════════════════════════════════════╗
 ║  EVERY FRAME (Automatic, ~60 FPS)                                        ║
 ╠══════════════════════════════════════════════════════════════════════════╣
-║  'update_and_render'             /* Main game loop */                    ║
-║    ├── 'update_position'         /* Processes input and moves player */  ║
-║    └── 'update_frame'            /* Renders and displays new frame */    ║
+║  update_and_render()             /* Main game loop */                    ║
+║    ├── update_position()         /* Processes input and moves player */  ║
+║    └── update_frame()            /* Renders and displays new frame */    ║
 ╚══════════════════════════════════════════════════════════════════════════╝
 
 
@@ -99,21 +99,21 @@
  * ═══════════════════════════════════════════════════════════════════════════
  *
  *  MAIN
- *    main.c                         Entry point and main program flow
- *    tester.c                       Mock data generation (temporary)
+ *    ./src/main.c                   Entry point and main program flow
+ *    ./src/tester.c                 Mock data generation (temporary)
  *
  *  INITIALIZATION & CLEANUP
- *    init_system.c                  System and game initialization
- *    init_player.c                  Player position and direction setup
- *    init_images.c                  Texture and frame buffer loading
- *    clean_system_exit.c            Memory cleanup and exit handling
+ *    ./src/utils/init_system.c      System and game initialization
+ *    ./src/utils/init_player.c      Player position and direction setup
+ *    ./src/utils/init_images.c      Texture and frame buffer loading
+ *    ./src/utils/clean_system_exit.c Memory cleanup and exit handling
  *
  *  EVENT HANDLING & GAME LOOP
- *    set_hooks.c                    Event handler registration
- *    controls.c                     Keyboard input handlers
- *    actions_I.c                    Movement functions (forward/backward/left/right)
- *    actions_II.c                   Rotation functions (left/right)
- *    updates.c                      Game loop and frame rendering
+ *    ./src/hooks/set_hooks.c        Event handler registration
+ *    ./src/hooks/controls.c         Keyboard input handlers
+ *    ./src/hooks/actions_I.c        Movement functions (forward/backward/left/right)
+ *    ./src/hooks/actions_II.c       Rotation functions (left/right)
+ *    ./src/hooks/updates.c          Game loop and frame rendering
  *
  * ═══════════════════════════════════════════════════════════════════════════
  */
