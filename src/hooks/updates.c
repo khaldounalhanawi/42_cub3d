@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 17:29:54 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/23 17:32:18 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/23 17:41:27 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include "main.h"
 #include "keyboard_keys.h"
 #include "mlx.h"
-#include <stdio.h>
 #include <unistd.h>
 
 void	my_mlx_pixel_put(t_image *frame, t_player a, int color, int arrow_len)
