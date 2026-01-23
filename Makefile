@@ -27,7 +27,8 @@ UTILS_OBJS = $(UTILS_CFILES:.c=.o)
 HOOKS_DIR = ./src/hooks
 HOOKS_HEADER = $(HOOKS_DIR)/local_hooks.h
 HOOKS_CFILES = 	$(HOOKS_DIR)/set_hooks.c \
-				$(HOOKS_DIR)/actions.c \
+				$(HOOKS_DIR)/actions_I.c \
+				$(HOOKS_DIR)/actions_II.c \
 				$(HOOKS_DIR)/updates.c \
 				$(HOOKS_DIR)/controls.c
 HOOKS_OBJS = $(HOOKS_CFILES:.c=.o)

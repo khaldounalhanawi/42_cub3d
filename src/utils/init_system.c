@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 12:18:22 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/22 17:06:51 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/23 16:52:37 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static void	init_input(t_game *game)
 	game->input.forward = 0;
 	game->input.left = 0;
 	game->input.right = 0;
+	game->input.rot_right = 0;
+	game->input.rot_left = 0;
 }
 
 void	init_system(t_game *game, t_init_data data)
@@ -46,6 +48,9 @@ void	init_system(t_game *game, t_init_data data)
 	load_textures (game, data);
 	game->frame = init_frame (game);
 	if (!game->frame.img)
+	{
+		clear_data (data);
 		clean_system_exit (game, IMAGES, "couldn't initiate frame\n");
+	}
 	game->map = data.map;
 }

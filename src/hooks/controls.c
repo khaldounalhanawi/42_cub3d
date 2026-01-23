@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 17:29:54 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/22 18:07:50 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/23 17:35:33 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,11 @@ int	key_press(int key, t_game *game)
 		game->input.left = 1;
 	if (key == KEY_D)
 		game->input.right = 1;
-		return (0);
+	if (key == KEY_ARROW_L)
+		game->input.rot_left = 1;
+	if (key == KEY_ARROW_R)
+		game->input.rot_right = 1;
+	return (0);
 }
 
 int	key_release(int key, t_game *game)
@@ -39,6 +43,9 @@ int	key_release(int key, t_game *game)
 		game->input.left = 0;
 	if (key == KEY_D)
 		game->input.right = 0;
+	if (key == KEY_ARROW_L)
+		game->input.rot_left = 0;
+	if (key == KEY_ARROW_R)
+		game->input.rot_right = 0;
 	return (0);
 }
-

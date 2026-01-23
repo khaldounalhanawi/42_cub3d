@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 17:29:54 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/22 19:16:38 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/23 17:35:42 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,3 @@ void	set_hooks(t_game *game)
 	mlx_hook (game->win, 3, 1L << 1, key_release, game);
 	mlx_loop_hook (game->mlx, update_and_render, game);
 }
-

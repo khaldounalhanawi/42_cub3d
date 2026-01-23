@@ -6,13 +6,16 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 12:04:36 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/22 13:29:41 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/23 17:24:00 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DATA_TYPES_H
 # define DATA_TYPES_H
 
+# ifndef DEBUG
+#  define DEBUG 0
+# endif
 # ifndef WIDTH
 #  define WIDTH 800
 # endif
@@ -124,6 +127,8 @@ typedef struct s_input
 	int	backward;
 	int	right;
 	int	left;
+	int	rot_right;
+	int	rot_left;
 }	t_input;
 
 typedef struct s_game

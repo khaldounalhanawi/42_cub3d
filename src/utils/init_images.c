@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_textures.c                                      :+:      :+:    :+:   */
+/*   init_images.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/19 12:18:22 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/22 12:32:14 by kalhanaw         ###   ########.fr       */
+/*   Created: 2026/01/23 10:56:59 by kalhanaw          #+#    #+#             */
+/*   Updated: 2026/01/23 16:47:58 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ void	load_textures(t_game *game, t_init_data data)
 	while (i < 4)
 	{
 		if (!game->textures[i].img)
+		{
+			clear_data (data);
 			clean_system_exit (game, IMAGES, "image failed to load\n");
+		}
 		i ++;
 	}
 }
