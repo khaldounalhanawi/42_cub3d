@@ -16,19 +16,20 @@
 
 int main(int argc, char **argv)
 {
-	// t_init_data	data;
-	// t_game		game;
+	t_init_data	data;
+	t_game		game;
 
-	// if (argc != 2)
-	// 	exit_text ("Wrong count of arguments\n");
-	// parse_input (&data, argv[1]);
+	if (argc != 2)
+		exit_text ("Wrong count of arguments\n");
+	parse_input (&data, argv[1]);
 	// validate_input (data);
 	// init_game (&game, data);
 	// set_hooks (&game);
 	// mlx_loop (game.mlx);
 	// cleanup (&game);
 
-	(void) argc;
-	(void) argv;
+	(void)game;
+	//(void) argc;
+	//(void) argv;
 	return (0);
 }

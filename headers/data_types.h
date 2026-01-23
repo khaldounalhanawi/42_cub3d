@@ -35,6 +35,21 @@
 #  define FOV 0.66
 # endif
 
+typedef struct s_map
+{
+	int		width;
+	int		height;
+	char	**grid;
+} t_map;
+
+typedef struct s_mapbuf
+{
+	char	**lines;
+	int		h;
+	int		cap;
+	int		max_w;
+}	t_mapbuf;
+
 typedef struct s_init_data
 {
 	char	*north_tex;
@@ -43,18 +58,13 @@ typedef struct s_init_data
 	char	*east_tex;
 	int		floor_color[3];
 	int		ceiling_color[3];
+	int		has_floor;
+	int		has_ceiling;
 	t_map	*map;
 	int		player_x;
 	int		player_y;
 	char	player_dir;
 } t_init_data;
-
-typedef struct s_map
-{
-	int		width;
-	int		height;
-	char	**grid;
-} t_map;
 
 typedef struct s_player
 {
@@ -120,4 +130,3 @@ typedef struct s_game
 } t_game;
 
 #endif
-

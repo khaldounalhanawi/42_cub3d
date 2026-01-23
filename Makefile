@@ -1,39 +1,43 @@
 NAME = cub3D
 FLAGS = -Wall -Wextra -Werror
 INCLUDE_PATH = ./headers
-TYPES = data_types.h
-LIBRARYS = ./libs
+SRC_DIR = ./src
 
-# for main
-MAIN_DIR = ./src
-MAIN_CFILES = $(MAIN_DIR)/main.c $(MAIN_DIR)/tester.c
-MAIN_OBJS = $(MAIN_CFILES:.c=.o)
-
-
-# Libft
-LIBFT_DIR = $(LIBRARYS)/Libft
+LIBS_DIR = ./libs
+LIBFT_DIR = $(LIBS_DIR)/Libft
 LIBFT_HEADER_DIR = $(LIBFT_DIR)/include
-LIBFT = LIBFT_DIR/libft.a
+LIBFT = $(LIBFT_DIR)/libft.a
+
+SRC = \
+$(SRC_DIR)/main.c \
+$(SRC_DIR)/tester.c \
+$(SRC_DIR)/parse_input.c \
+$(SRC_DIR)/parse_line.c \
+$(SRC_DIR)/check_line.c \
+$(SRC_DIR)/finalize_parse.c \
+$(SRC_DIR)/find_player.c
+
+OBJS = $(SRC:.c=.o)
 
 all : $(NAME)
 
-$(NAME) : $(MAIN_OBJS) $(LIBFT)
-	cc $(FLAGS) $(MAIN_OBJS) -o $(NAME)
+$(NAME): $(OBJS) $(LIBFT)
+	cc $(FLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 
-$(MAIN_DIR)/%.o: $(MAIN_DIR)/%.c $(INCLUDE_PATH)/$(TYPES) $(INCLUDE_PATH)/main.h
-	cc $(FLAGS) -I $(INCLUDE_PATH) -I LIBFT_HEADER_DIR -c $< -o $@
+$(SRC_DIR)/%.o: $(SRC_DIR)/%.c $(INCLUDE_PATH)/data_types.h $(INCLUDE_PATH)/main.h
+	cc $(FLAGS) -I $(INCLUDE_PATH) -I $(LIBFT_HEADER_DIR) -c $< -o $@
 
-$(LIBFT) :
+$(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
 
-clean :
-	rm -rf $(MAIN_OBJS)
+clean:
+	rm -f $(OBJS)
 	$(MAKE) clean -C $(LIBFT_DIR)
 
-fclean : clean
-	rm -rf $(NAME)
+fclean: clean
+	rm -f $(NAME)
 	$(MAKE) fclean -C $(LIBFT_DIR)
 
-re : fclean all
+re: fclean all
 
-.PHONY : all clean fclean re
+.PHONY: all clean fclean re
