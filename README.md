@@ -35,9 +35,7 @@
 │   ├── 'mlx_hook' × 3                  /* MLX: Registers three event handlers */
 │   │   ├── 'close_window'              /* Handles window close event (X button) */
 │   │   │   └── 'clean_system_exit'     /* Final cleanup and exit */
-│   │   │       └── 'clear_textures'    /* Destroys all texture images */
 │   │   ├── 'key_press'                 /* Sets input flags when keys are pressed (W/S/A/D/Arrows) */
-│   │   │   └── 'close_window' [ESC]    /* Exit if ESC pressed */
 │   │   └── 'key_release'               /* Clears input flags when keys are released */
 │   └── 'mlx_loop_hook'                 /* MLX: Registers the main game loop function */
 │       └── 'update_and_render'         /* Called every frame automatically */
@@ -53,8 +51,7 @@
 │               ├── 'mlx_get_data_addr' /* MLX: Gets frame data pointer */
 │               ├── 'my_mlx_pixel_put'  /* Draws player position and direction arrow */
 │               ├── 'mlx_put_image_to_window' /* MLX: Displays frame to screen */
-│               ├── 'mlx_destroy_image' /* MLX: Destroys old frame to prevent memory leak */
-│               └── 'clean_system_exit' /* Cleanup on error */
+│               └── 'mlx_destroy_image' /* MLX: Destroys old frame to prevent memory leak */
 │
 ├── 'mlx_loop'                          /* MLX: Starts infinite event loop until window is closed */
 │
