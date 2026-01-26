@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 17:29:54 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/23 17:41:27 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/26 12:46:33 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,49 @@ void	update_position(t_game *game)
 		rot_right (game);
 }
 
+void	draw_square(t_image *frame, int x, int y, int color)
+{
+	int		i;
+	int		j;
+	char	*target;
+
+	i = 0;
+	while (i < UNIT_SIZE)
+	{
+		j = 0;
+		while (j < UNIT_SIZE)
+		{
+			target = (char *)frame->addr
+				+ ((y + i) * frame->line_length)
+				+ ((x + j) * (frame->bpp / 8));
+			*(int *)target = color;
+			j ++;
+		}
+		i ++;
+	}
+}
+
+void	create_walls(t_image *new_frame, t_map map)
+{
+	int	column;
+	int	row;
+
+	row = 0;
+	while (row < map.height)
+	{
+		column = 0;
+		while (column < map.width)
+		{
+			if (map.grid[row][column] == '1'
+				&& column * UNIT_SIZE <= WIDTH
+				&& row * UNIT_SIZE <= HEIGHT)
+				draw_square (new_frame, column * UNIT_SIZE, row * UNIT_SIZE, 0xFFFFFF);
+			column ++;
+		}
+		row ++;
+	}
+}
+
 void	update_frame(t_game *game)
 {
 	t_image	new_frame;
@@ -68,6 +111,7 @@ void	update_frame(t_game *game)
 	if (!new_frame.addr)
 		clean_system_exit (game, FULL,
 			"@update_frame: failed to extract addr\n");
+	create_walls (&new_frame, *game->map);
 	my_mlx_pixel_put (&new_frame, game->player, 0xff00ff, 10);
 	game->frame = new_frame;
 	mlx_put_image_to_window (game->mlx, game->win, game->frame.img, 0, 0);
