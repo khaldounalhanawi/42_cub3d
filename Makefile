@@ -1,5 +1,7 @@
 NAME = cub3D
-FLAGS = -Wall -Wextra -Werror
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
+
 INCLUDE_PATH = ./headers
 SRC_DIR = ./src
 
@@ -9,23 +11,27 @@ LIBFT_HEADER_DIR = $(LIBFT_DIR)/include
 LIBFT = $(LIBFT_DIR)/libft.a
 
 SRC = \
-$(SRC_DIR)/main.c \
-$(SRC_DIR)/tester.c \
-$(SRC_DIR)/parse_input.c \
-$(SRC_DIR)/parse_line.c \
-$(SRC_DIR)/check_line.c \
-$(SRC_DIR)/finalize_parse.c \
-$(SRC_DIR)/find_player.c
+	$(SRC_DIR)/main.c \
+	$(SRC_DIR)/parse/parse_input.c \
+	$(SRC_DIR)/parse/parse_line.c \
+	$(SRC_DIR)/parse/check_line.c \
+	$(SRC_DIR)/parse/build_map.c \
+	$(SRC_DIR)/parse/find_player.c \
+	$(SRC_DIR)/parse/set_color.c \
+	$(SRC_DIR)/parse/set_texture.c \
+	$(SRC_DIR)/parse/free_utils.c \
+	$(SRC_DIR)/validating/validate_input.c \
+	$(SRC_DIR)/validating/free_validating.c
 
 OBJS = $(SRC:.c=.o)
 
-all : $(NAME)
+all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
-	cc $(FLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 
-$(SRC_DIR)/%.o: $(SRC_DIR)/%.c $(INCLUDE_PATH)/data_types.h $(INCLUDE_PATH)/main.h
-	cc $(FLAGS) -I $(INCLUDE_PATH) -I $(LIBFT_HEADER_DIR) -c $< -o $@
+$(SRC_DIR)/%.o: $(SRC_DIR)/%.c
+	$(CC) $(CFLAGS) -I $(INCLUDE_PATH) -I $(LIBFT_HEADER_DIR) -c $< -o $@
 
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)

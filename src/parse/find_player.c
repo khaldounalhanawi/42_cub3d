@@ -10,50 +10,44 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "data_types.h"
-#include "main.h"
+#include "parse.h"
 #include <fcntl.h>
 
-static int	is_player(char c)
-{
-	return (c == 'N' || c == 'S' || c == 'E' || c == 'W');
-}
-
-static void	handle_player_cell(t_init_data *d, t_map *m, 
-		int x, int y, int *count)
+static void	handle_player_cell(t_init_data *data, int x, int y, int *count)
 {
 	char	c;
 
-	c = m->grid[y][x];
+	c = data->map->grid[y][x];
 	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 	{
-		d->player_x = x;
-		d->player_y = y;
-		d->player_dir = c;
-		m->grid[y][x] = '0';
+		data->player_x = x;
+		data->player_y = y;
+		data->player_dir = c;
+		data->map->grid[y][x] = '0';
 		(*count)++;
 	}
 }
-// remove map since DATA has already map in it
-// naming of d=DATA
-void	find_player(t_init_data *d, t_map *m)
-{
-	int	x;
-	int	y;
-	int	count;
 
+void	find_player(t_parse_data *pdata)
+{
+	int			x;
+	int			y;
+	int			count;
+	t_init_data	*data;
+
+	data = pdata->data;
 	count = 0;
 	y = 0;
-	while (y < m->height)
+	while (y < data->map->height)
 	{
 		x = 0;
-		while (x < m->width)
+		while (x < data->map->width)
 		{
-			handle_player_cell(d, m, x, y, &count);
+			handle_player_cell(data, x, y, &count);
 			x++;
 		}
 		y++;
 	}
 	if (count != 1)
-		exit_text("Error\nInvalid player count\n");
+		exit_parse(pdata, "Error\nInvalid player count\n");
 }

@@ -1,37 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   free_validating.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/16 17:29:54 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/19 13:43:45 by kalhanaw         ###   ########.fr       */
+/*   Created: 2026/01/16 12:04:36 by kalhanaw          #+#    #+#             */
+/*   Updated: 2026/01/19 16:05:06 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "data_types.h"
-#include "main.h"
-#include "parse.h"
 #include "validating.h"
-#include <stdio.h>
+#include "parse.h"
 
-int main(int argc, char **argv)
+void	free_visited(t_init_data *data, char **visited)
 {
-	t_init_data	data;
-	t_game		game;
+	int	y;
 
-	if (argc != 2)
-		exit_text ("Wrong count of arguments\n");
-	parse_input (&data, argv[1]);
-	validate_input (&data);
-	// init_game (&game, data);
-	// set_hooks (&game);
-	// mlx_loop (game.mlx);
-	// cleanup (&game);
+	if (!visited)
+		return ;
+	y = 0;
+	while (y < data->map->height)
+		free(visited[y++]);
+	free(visited);
+}
 
-	(void)game;
-	//(void) argc;
-	//(void) argv;
-	return (0);
+void	exit_map_error(t_init_data *data, char **visited)
+{
+	free_visited(data, visited);
+	exit_validate(data, "Error\nMap not closed\n");
+}
+
+void	exit_validate(t_init_data *data, char *msg)
+{
+	if (data)
+		free_init_data(data);
+	exit_text(msg);
 }

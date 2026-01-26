@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "data_types.h"
-#include "main.h"
+#include "parse.h"
 #include <fcntl.h>
 
 static int	is_space(char c)
@@ -62,10 +61,10 @@ int	check_line(char *line, int in_map)
 	if (line[i] == '\0')
 	{
 		if (in_map)
-			return (-1); //error
-		return (0); //empty line
+			return (-1);
+		return (0);
 	}
 	if (!in_map && is_config_line(line))
-		return (2); //configuration line
-	return (check_map_syntax(line, i)); //1 if chars are ok
+		return (2);
+	return (check_map_syntax(line, i));
 }

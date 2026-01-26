@@ -66,6 +66,14 @@ typedef struct s_init_data
 	char	player_dir;
 } t_init_data;
 
+typedef struct s_parse_data
+{
+	t_init_data	*data;
+	t_mapbuf	*mb;
+	int			fd;
+	char		*line;
+}	t_parse_data;
+
 typedef struct s_player
 {
 	double	pos_x;

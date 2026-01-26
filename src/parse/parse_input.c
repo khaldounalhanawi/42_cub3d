@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "data_types.h"
-#include "main.h"
+#include "parse.h"
 #include <fcntl.h>
 
 static int check_path(const char *s)
@@ -24,31 +24,39 @@ static int check_path(const char *s)
 	return (1);
 }
 
+static void	init_parse_data(t_parse_data *pd, t_init_data *data, t_mapbuf *mb)
+{
+	ft_bzero(data, sizeof(*data));
+	ft_bzero(mb, sizeof(*mb));
+	pd->data = data;
+	pd->mb = mb;
+	pd->fd = -1;
+	pd->line = NULL;
+}
+
 void	parse_input(t_init_data *data, char *path)
 {
-	int			fd;
-	char		*line;
+	t_parse_data	pdata;
 	int			in_map;
 	t_mapbuf	mb;
 
-	line = NULL;
-	in_map = 0;
 	if (!data || !path || !check_path(path))
-		exit_text("Wrong file\n");
-	ft_bzero(data, sizeof(*data));
-	ft_bzero(&mb, sizeof(mb));
-	fd = open(path, O_RDONLY);
-	if (fd < 0)
-		exit_text("Wrong file\n");
-	while ((line = get_next_line(fd)))
+		exit_text("Error\nWrong file\n");
+	init_parse_data(&pdata, data, &mb);
+	in_map = 0;
+	pdata.fd = open(path, O_RDONLY);
+	if (pdata.fd < 0)
+		exit_parse(&pdata, "Error\nWrong file\n");
+	while ((pdata.line = get_next_line(pdata.fd)))
 	{
-		parse_line(data, &mb, line, &in_map);
-		free(line);
+		parse_line(&pdata, pdata.line, &in_map);
+		free(pdata.line);
+		pdata.line = NULL;
 	}
-	close(fd);
+	close(pdata.fd);
+	pdata.fd = -1;
 	if (!in_map)
-		exit_text("Missing map\n");
-	finalize_parse(data, &mb);
-	// try to make all the important functions clear in the body,
-	
+		exit_parse(&pdata, "Error\nMissing map\n");
+	build_map(&pdata);
+	find_player(&pdata);
 }
