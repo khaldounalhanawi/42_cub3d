@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 12:18:22 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/20 19:29:20 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/27 16:31:18 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ static void	clear_textures(t_game *game)
 	}
 }
 
+#include <stdio.h>
 // try on Linux>>
 //		clear_map (game->map);
 //		free (game->map);
@@ -96,5 +97,12 @@ void	clean_system_exit(t_game *game, int code, char *msg)
 	}
 	if (msg)
 		ft_putstr_fd (msg, 2);
+	if (DEBUG)
+	{
+		int	x = -1;
+		while (++x < WIDTH)
+			printf("%f ", game->ray_hits[x].distance);
+	}
+
 	exit (0);
 }

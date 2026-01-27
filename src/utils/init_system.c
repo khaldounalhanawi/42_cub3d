@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 12:18:22 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/23 16:52:37 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/27 13:03:32 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "mlx.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include "libft.h"
 
 static int	convert_arr_to_color(int input[])
 {
@@ -36,7 +37,7 @@ void	init_system(t_game *game, t_init_data data)
 	game->screen_width = WIDTH;
 	init_input (game);
 	init_player (game, data);
-	game->ray_hits = NULL;
+	ft_memset (game->ray_hits, 0, sizeof (game->ray_hits));
 	game->floor_color = convert_arr_to_color (data.floor_color);
 	game->ceiling_color = convert_arr_to_color (data.ceiling_color);
 	game->mlx = mlx_init ();

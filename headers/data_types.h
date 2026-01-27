@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 12:04:36 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/23 17:24:00 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/27 14:12:32 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define DATA_TYPES_H
 
 # ifndef DEBUG
-#  define DEBUG 0
+#  define DEBUG 1
 # endif
 # ifndef WIDTH
 #  define WIDTH 800
@@ -94,21 +94,22 @@ typedef struct s_raycast
 	int		map_y;
 	double	side_dist_x;
 	double	side_dist_y;
-	double	delta_dist_x;
-	double	delta_dist_y;
+	double	delta_x;
+	double	delta_y;
 	int		step_x;
 	int		step_y;
 	int		hit;
 	int		side;
 }	t_raycast;
 
-typedef struct s_rayhit
+typedef struct s_rayhit_info
 {
 	double	distance;
-	int		side;
-	int		wall_dir;
-	double	wall_hit;
-}	t_rayhit;
+	int		wall_side;
+	double	texture_x_pos;
+	int		draw_start;
+	int		draw_end;
+}	t_rayhit_info;
 
 typedef struct s_image
 {
@@ -133,18 +134,18 @@ typedef struct s_input
 
 typedef struct s_game
 {
-	void		*mlx;
-	void		*win;
-	t_image		frame;
-	t_image		textures[4];
-	t_rayhit	*ray_hits;
-	t_player	player;
-	int			floor_color;
-	int			ceiling_color;
-	int			screen_width;
-	int			screen_height;
-	t_map		*map;
-	t_input		input;
+	void			*mlx;
+	void			*win;
+	t_image			frame;
+	t_image			textures[4];
+	t_rayhit_info	ray_hits[WIDTH];
+	t_player		player;
+	int				floor_color;
+	int				ceiling_color;
+	int				screen_width;
+	int				screen_height;
+	t_map			*map;
+	t_input			input;
 }	t_game;
 
 #endif
