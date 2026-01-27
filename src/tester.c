@@ -53,13 +53,13 @@ t_init_data	example_data(void)
 	data.east_tex = ft_strdup ("./textures/East.xpm");
 	data.west_tex = ft_strdup ("./textures/West.xpm");
 
-	data.ceiling_color[0] = 220;
-	data.ceiling_color[1] = 100;
-	data.ceiling_color[2] = 0;
+	data.ceiling_color[0] = 135;
+	data.ceiling_color[1] = 206;
+	data.ceiling_color[2] = 235;
 
-	data.floor_color[0] = 225;
-	data.floor_color[1] = 30;
-	data.floor_color[2] = 0;
+	data.floor_color[0] = 128;
+	data.floor_color[1] = 128;
+	data.floor_color[2] = 128;
 
 	data.player_x = 5;
 	data.player_y = 5;

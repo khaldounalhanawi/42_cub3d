@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 17:29:54 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/27 16:44:29 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/27 18:16:39 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void test_render(t_game *game)
 			tex_x = 0;
 		if (tex_x >= TEXTURE_DIM)
 			tex_x = TEXTURE_DIM - 1;
-		step = (double)TEXTURE_DIM / (game->ray_hits[x].draw_end - game->ray_hits[x].draw_start);
-		tex_pos = 0;
+		step = (double)TEXTURE_DIM / game->ray_hits[x].line_height;
+		tex_pos = (game->ray_hits[x].draw_start - HEIGHT / 2 + game->ray_hits[x].line_height / 2) * step;
 		y = game->ray_hits[x].draw_start;
 		while (y <= game->ray_hits[x].draw_end)
 		{

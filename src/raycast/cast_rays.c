@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 17:29:54 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/27 16:37:19 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/27 18:16:39 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,22 @@ void	set_initial_step(t_raycast *ray, double pos_x, double pos_y)
 	if (ray->ray_dir_x < 0)
 	{
 		ray->step_x = -1;
-		ray->side_dist_x = (pos_x - ray->map_x) * ray->delta_x;
+		ray->side_dist_x = (pos_x - ray->grid_x) * ray->delta_x;
 	}
 	else
 	{
 		ray->step_x = 1;
-		ray->side_dist_x = (ray->map_x + 1.0 - pos_x) * ray->delta_x;
+		ray->side_dist_x = (ray->grid_x + 1.0 - pos_x) * ray->delta_x;
 	}
 	if (ray->ray_dir_y < 0)
 	{
 		ray->step_y = -1;
-		ray->side_dist_y = (pos_y - ray->map_y) * ray->delta_y;
+		ray->side_dist_y = (pos_y - ray->grid_y) * ray->delta_y;
 	}
 	else
 	{
 		ray->step_y = 1;
-		ray->side_dist_y = (ray->map_y + 1.0 - pos_y) * ray->delta_y;
+		ray->side_dist_y = (ray->grid_y + 1.0 - pos_y) * ray->delta_y;
 	}
 }
 
@@ -55,19 +55,19 @@ void	loop_dda(t_raycast *ray, t_map map)
 		if (ray->side_dist_x < ray->side_dist_y)
 		{
 			ray->side_dist_x += ray->delta_x;
-			ray->map_x += ray->step_x;
+			ray->grid_x += ray->step_x;
 			ray->side = X;
 		}
 		else
 		{
 			ray->side_dist_y += ray->delta_y;
-			ray->map_y += ray->step_y;
+			ray->grid_y += ray->step_y;
 			ray->side = Y;
 		}
-		if (ray->map_x < 0 || ray->map_y < 0
-			|| ray->map_x >= map.width || ray->map_y >= map.height)
+		if (ray->grid_x < 0 || ray->grid_y < 0
+			|| ray->grid_x >= map.width || ray->grid_y >= map.height)
 			ray->hit = 1;
-		else if (map.grid[ray->map_y][ray->map_x] == '1')
+		else if (map.grid[ray->grid_y][ray->grid_x] == '1')
 			ray->hit = 1;
 	}
 }
@@ -76,16 +76,16 @@ double	calculate_distance(t_game *game, t_raycast *ray, int x)
 {
 	double	camera_x;
 	double	distance;
-	double	pos_x;
-	double	pos_y;
+	double	origin_x;
+	double	origin_y;
 
 	camera_x = 2 * x / (double)WIDTH - 1;
 	ray->ray_dir_x = game->player.dir_x + game->player.plane_x * camera_x;
 	ray->ray_dir_y = game->player.dir_y + game->player.plane_y * camera_x;
-	pos_x = game->player.pos_x / UNIT_SIZE;
-	pos_y = game->player.pos_y / UNIT_SIZE;
-	ray->map_x = (int)pos_x;
-	ray->map_y = (int)pos_y;
+	origin_x = game->player.pos_x / UNIT_SIZE;
+	origin_y = game->player.pos_y / UNIT_SIZE;
+	ray->grid_x = (int)origin_x;
+	ray->grid_y = (int)origin_y;
 	if (ray->ray_dir_x == 0)
 		ray->delta_x = 1e30;
 	else
@@ -94,13 +94,13 @@ double	calculate_distance(t_game *game, t_raycast *ray, int x)
 		ray->delta_y = 1e30;
 	else
 		ray->delta_y = fabs(1 / ray->ray_dir_y);
-	set_initial_step(ray, pos_x, pos_y);
+	set_initial_step(ray, origin_x, origin_y);
 	loop_dda(ray, *game->map);
 	if (ray->side == X)
-		distance = fabs((ray->map_x - pos_x
+		distance = fabs((ray->grid_x - origin_x
 				+ (1 - ray->step_x) / 2) / ray->ray_dir_x);
 	else
-		distance = fabs((ray->map_y - pos_y
+		distance = fabs((ray->grid_y - origin_y
 				+ (1 - ray->step_y) / 2) / ray->ray_dir_y);
 	return (distance);
 }
@@ -111,6 +111,7 @@ void	calculate_draw_start_end(t_rayhit_info *ray_info)
 	int	line_height;
 
 	line_height = (int)(HEIGHT / ray_info->distance);
+	ray_info->line_height = line_height;
 	ray_info->draw_start = -line_height / 2 + HEIGHT / 2;
 	if (ray_info->draw_start < 0)
 		ray_info->draw_start = 0;

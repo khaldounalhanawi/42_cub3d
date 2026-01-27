@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 12:04:36 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/27 14:12:32 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/27 18:16:39 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ typedef struct s_raycast
 {
 	double	ray_dir_x;
 	double	ray_dir_y;
-	int		map_x;
-	int		map_y;
+	int		grid_x;
+	int		grid_y;
 	double	side_dist_x;
 	double	side_dist_y;
 	double	delta_x;
@@ -109,6 +109,7 @@ typedef struct s_rayhit_info
 	double	texture_x_pos;
 	int		draw_start;
 	int		draw_end;
+	int		line_height;
 }	t_rayhit_info;
 
 typedef struct s_image
