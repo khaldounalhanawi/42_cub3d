@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 12:04:36 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/27 18:16:39 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/27 18:21:34 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 #  define HEIGHT 600
 # endif
 # ifndef TEXTURE_DIM
-#  define TEXTURE_DIM 64
+#  define TEXTURE_DIM 1024
 # endif
 # ifndef UNIT_SIZE
 #  define UNIT_SIZE 32
