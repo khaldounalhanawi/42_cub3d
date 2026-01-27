@@ -28,6 +28,9 @@ static void	init_parse_data(t_parse_data *pd, t_init_data *data, t_mapbuf *mb)
 {
 	ft_bzero(data, sizeof(*data));
 	ft_bzero(mb, sizeof(*mb));
+	data->map = (t_map *)ft_calloc(1, sizeof(t_map));
+		if (!data->map)
+    exit_text("Error\nMalloc failed\n");
 	pd->data = data;
 	pd->mb = mb;
 	pd->fd = -1;

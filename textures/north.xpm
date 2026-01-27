@@ -1,0 +1,5 @@
+/* XPM */
+static char *xpm[] = {
+"1 1 1 1",
+"0 c #FFFFFF",
+"0"};
