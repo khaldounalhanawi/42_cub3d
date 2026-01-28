@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 17:29:54 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/28 12:53:50 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/28 13:09:33 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,13 @@ void	loop_dda(t_raycast *ray, t_map map)
 	}
 }
 
-void	calculate_ray_direction(t_game *game, t_raycast *ray, int x)
+void	calculate_ray_direction(t_player player, t_raycast *ray, int x)
 {
 	double	camera_x;
 
 	camera_x = 2 * (x / (double)WIDTH) - 1;
-	ray->ray_dir_x = game->player.dir_x + game->player.plane_x * camera_x;
-	ray->ray_dir_y = game->player.dir_y + game->player.plane_y * camera_x;
+	ray->ray_dir_x = player.dir_x + player.plane_x * camera_x;
+	ray->ray_dir_y = player.dir_y + player.plane_y * camera_x;
 }
 
 void	set_delta_x_y(t_raycast *ray)
@@ -103,7 +103,7 @@ double	calculate_distance(t_game *game, t_raycast *ray, int x)
 	origin_y = game->player.pos_y / UNIT_SIZE;
 	ray->grid_x = (int)origin_x;
 	ray->grid_y = (int)origin_y;
-	calculate_ray_direction (game, ray, x);
+	calculate_ray_direction (game->player, ray, x);
 	set_delta_x_y (ray);
 	set_initial_step(ray, origin_x, origin_y);
 	loop_dda(ray, *game->map);
@@ -163,34 +163,6 @@ void	get_position_on_texture(double origin_x, double origin_y,
 		|| (ray.side == Y && ray.ray_dir_y > 0))
 		ray_info->texture_x_pos = TEXTURE_DIM - ray_info->texture_x_pos - 1;
 }
-
-// t_rayhit_info	create_ray_hit(t_game *game, int x)
-// {
-// 	t_rayhit_info	ray_info;
-// 	t_raycast		ray;
-// 	double			pos_x;
-// 	double			pos_y;
-	
-// 	pos_x = game->player.pos_x / UNIT_SIZE;
-// 	pos_y = game->player.pos_y / UNIT_SIZE;
-// 	ray_info.distance = calculate_distance (game, &ray, x);
-// 	calculate_draw_start_end (&ray_info);
-// 	set_wall_side (&ray_info, ray);
-// 	get_position_on_texture (pos_x, pos_y, ray, &ray_info);
-// 	return (ray_info);
-// }
-
-// void	cast_rays (t_game *game)
-// {
-// 	int	x;
-
-// 	x = 0;
-// 	while (x < WIDTH)
-// 	{
-// 		game->ray_hits[x] = create_ray_hit (game, x);
-// 		x ++;
-// 	}
-// }
 
 t_rayhit_info	create_ray_hit(t_game *game, int x)
 {
