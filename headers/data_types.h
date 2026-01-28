@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 12:04:36 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/28 12:04:55 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/28 18:22:07 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 #  define UNIT_SIZE 32
 # endif
 # ifndef SPEED
-#  define SPEED 3.0
+#  define SPEED 0.75
 # endif
 # ifndef ROTATION
 #  define ROTATION 0.03

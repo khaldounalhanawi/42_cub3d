@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 17:29:54 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/28 14:03:07 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/28 18:44:47 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "mlx.h"
 
 #include <stdlib.h>
+#include <math.h>
 
 void test_render(t_game *game)
 {
@@ -26,14 +27,21 @@ void test_render(t_game *game)
 	double	step;
 	double	tex_pos;
 	int		color;
+	double	distance;
+	double	alpha;
+	int		fog_color;
+	int		frame_color;
+	int		r;
+	int		g;
+	int		b;
 
 	x = 0;
-	while (x < WIDTH)
+	while (x < game->screen_width)
 	{
 		y = 0;
 		while (y < game->ray_hits[x].draw_start)
 		{
-			game->frame.addr[y * WIDTH + x] = game->ceiling_color;
+			game->frame.addr[y * (game->frame.line_length / 4) + x] = game->ceiling_color;
 			y++;
 		}
 		tex_x = (int)game->ray_hits[x].texture_x_pos;
@@ -42,8 +50,15 @@ void test_render(t_game *game)
 		if (tex_x >= TEXTURE_DIM)
 			tex_x = TEXTURE_DIM - 1;
 		step = (double)TEXTURE_DIM / game->ray_hits[x].line_height;
-		tex_pos = (game->ray_hits[x].draw_start - HEIGHT / 2 + game->ray_hits[x].line_height / 2) * step;
+		tex_pos = (game->ray_hits[x].draw_start - game->screen_height / 2 + game->ray_hits[x].line_height / 2) * step;
 		y = game->ray_hits[x].draw_start;
+		distance = game->ray_hits[x].distance;
+		alpha = (distance - 5.0) / (25.0 - 5.0);
+		if (alpha < 0)
+			alpha = 0;
+		if (alpha > 1)
+			alpha = 1;
+		fog_color = 0xFFFFFF;
 		while (y <= game->ray_hits[x].draw_end)
 		{
 			tex_y = (int)tex_pos;
@@ -51,16 +66,25 @@ void test_render(t_game *game)
 				tex_y = TEXTURE_DIM - 1;
 			tex_pos += step;
 			color = game->textures[game->ray_hits[x].wall_side].addr[tex_y * TEXTURE_DIM + tex_x];
-			game->frame.addr[y * WIDTH + x] = color;
+			frame_color = color;
+			r = (int)(((frame_color >> 16) & 0xFF) * (1 - alpha) + ((fog_color >> 16) & 0xFF) * alpha);
+			g = (int)(((frame_color >> 8) & 0xFF) * (1 - alpha) + ((fog_color >> 8) & 0xFF) * alpha);
+			b = (int)((frame_color & 0xFF) * (1 - alpha) + (fog_color & 0xFF) * alpha);
+			color = (r << 16) | (g << 8) | b;
+			game->frame.addr[y * (game->frame.line_length / 4) + x] = color;
 			y++;
 		}
-		while (y < HEIGHT)
+		
+		// Draw floor as solid color
+		y = game->ray_hits[x].draw_end + 1;
+		while (y < game->screen_height)
 		{
-			game->frame.addr[y * WIDTH + x] = game->floor_color;
+			game->frame.addr[y * (game->frame.line_length / 4) + x] = game->floor_color;
 			y++;
 		}
 		x++;
 	}
+	
 	mlx_put_image_to_window(game->mlx, game->win, game->frame.img, 0, 0);
 }
 
@@ -68,8 +92,8 @@ int	update_and_render(t_game *game)
 {
 	update_position (game);
 	cast_rays (game);
-	// test_render (game);
-	update_frame (game);
+	test_render (game);
+	//update_frame (game);
 	return (0);
 }
 
