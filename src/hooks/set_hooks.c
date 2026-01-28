@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 17:29:54 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/27 18:16:39 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/28 14:03:07 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ int	update_and_render(t_game *game)
 {
 	update_position (game);
 	cast_rays (game);
-	test_render (game);
-	//update_frame (game);
+	// test_render (game);
+	update_frame (game);
 	return (0);
 }
 
