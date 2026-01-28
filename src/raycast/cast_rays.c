@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 17:29:54 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/28 13:09:33 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/28 13:15:34 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,20 +93,20 @@ void	set_delta_x_y(t_raycast *ray)
 		ray->delta_y = fabs(1 / ray->ray_dir_y);
 }
 
-double	calculate_distance(t_game *game, t_raycast *ray, int x)
+double	calculate_distance(t_player player, t_map map, t_raycast *ray, int x)
 {
 	double	distance;
 	double	origin_x;
 	double	origin_y;
 
-	origin_x = game->player.pos_x / UNIT_SIZE;
-	origin_y = game->player.pos_y / UNIT_SIZE;
+	origin_x = player.pos_x / UNIT_SIZE;
+	origin_y = player.pos_y / UNIT_SIZE;
 	ray->grid_x = (int)origin_x;
 	ray->grid_y = (int)origin_y;
-	calculate_ray_direction (game->player, ray, x);
+	calculate_ray_direction (player, ray, x);
 	set_delta_x_y (ray);
 	set_initial_step(ray, origin_x, origin_y);
-	loop_dda(ray, *game->map);
+	loop_dda(ray, map);
 	if (ray->side == X)
 		distance = fabs((ray->grid_x - origin_x
 				+ (1 - ray->step_x) / 2) / ray->ray_dir_x);
@@ -164,18 +164,18 @@ void	get_position_on_texture(double origin_x, double origin_y,
 		ray_info->texture_x_pos = TEXTURE_DIM - ray_info->texture_x_pos - 1;
 }
 
-t_rayhit_info	create_ray_hit(t_game *game, int x)
+t_rayhit_info	create_ray_hit(t_player player, t_map map, int x)
 {
 	t_rayhit_info	ray_info;
 	t_raycast		ray;
 	double			origin_x;
 	double			origin_y;
 	
-	ray_info.distance = calculate_distance (game, &ray, x);
+	ray_info.distance = calculate_distance (player, map, &ray, x);
 	calculate_draw_start_end (&ray_info);
 	set_wall_side (&ray_info, ray);
-	origin_x = game->player.pos_x / UNIT_SIZE;
-	origin_y = game->player.pos_y / UNIT_SIZE;
+	origin_x = player.pos_x / UNIT_SIZE;
+	origin_y = player.pos_y / UNIT_SIZE;
 	get_position_on_texture (origin_x, origin_y, ray, &ray_info);
 	return (ray_info);
 }
@@ -187,7 +187,7 @@ void	cast_rays (t_game *game)
 	x = 0;
 	while (x < WIDTH)
 	{
-		game->ray_hits[x] = create_ray_hit (game, x);
+		game->ray_hits[x] = create_ray_hit (game->player, *game->map, x);
 		x ++;
 	}
 }
