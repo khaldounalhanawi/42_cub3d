@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 17:29:54 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/29 14:47:20 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/29 20:24:02 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,12 @@ void test_render(t_game *game)
 		tex_pos = (game->ray_hits[x].draw_start - game->screen_height / 2 + game->ray_hits[x].line_height / 2) * step;
 		y = game->ray_hits[x].draw_start;
 		distance = game->ray_hits[x].distance;
-		alpha = (distance - 5.0) / (25.0 - 5.0);
+		alpha = (distance - 0.5) / (15.0 - 0.5);
 		if (alpha < 0)
 			alpha = 0;
-		if (alpha > 1)
-			alpha = 1;
-		fog_color = 0xFFFFFF;
+		if (alpha > 0.8)
+			alpha = 0.8;
+		fog_color = 0x6B4466;
 		while (y <= game->ray_hits[x].draw_end)
 		{
 			tex_y = (int)tex_pos;

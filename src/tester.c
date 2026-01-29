@@ -71,9 +71,9 @@ t_init_data	example_data(void)
 	data.east_tex = ft_strdup ("./textures/East.xpm");
 	data.west_tex = ft_strdup ("./textures/West.xpm");
 
-	data.ceiling_color[0] = 70;
-	data.ceiling_color[1] = 50;
-	data.ceiling_color[2] = 70;
+	data.ceiling_color[0] = 50;
+	data.ceiling_color[1] = 30;
+	data.ceiling_color[2] = 50;
 
 	data.floor_color[0] = 0;
 	data.floor_color[1] = 53;
