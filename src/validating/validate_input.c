@@ -58,12 +58,9 @@ void	validate_input(t_init_data *data)
 	if (!data->north_tex || !data->south_tex
 		|| !data->west_tex || !data->east_tex)
 		exit_validate(data, "Error\nMissing texture\n");
-
 	if (!data->has_floor || !data->has_ceiling)
 		exit_validate(data, "Error\nMissing color\n");
-
 	if (!data->map || !data->map->grid)
 		exit_validate(data, "Error\nEmpty map\n");
-
 	check_map_closed(data);
 }

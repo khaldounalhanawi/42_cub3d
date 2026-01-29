@@ -42,9 +42,9 @@ void	build_map(t_parse_data *pd)
 	mb = pd->mb;
 	data->map->height = mb->h;
 	data->map->width = mb->max_w;
-	data->map->grid = (char **)ft_calloc((size_t)data->map->height, sizeof(char *));
+	data->map->grid = ft_calloc(data->map->height, sizeof(char *));
 	if (!data->map->grid)
-    	exit_parse(pd, "Error\nMalloc failed\n");
+		exit_parse(pd, "Error\nMalloc failed\n");
 	i = 0;
 	while (i < data->map->height)
 	{

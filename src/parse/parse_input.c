@@ -14,9 +14,9 @@
 #include "parse.h"
 #include <fcntl.h>
 
-static int check_path(const char *s)
+static int	check_path(const char *s)
 {
-	size_t l;
+	size_t	l;
 
 	l = ft_strlen(s);
 	if (l < 5 || ft_strncmp(&s[l - 4], ".cub", 4))
@@ -29,19 +29,30 @@ static void	init_parse_data(t_parse_data *pd, t_init_data *data, t_mapbuf *mb)
 	ft_bzero(data, sizeof(*data));
 	ft_bzero(mb, sizeof(*mb));
 	data->map = (t_map *)ft_calloc(1, sizeof(t_map));
-		if (!data->map)
-    exit_text("Error\nMalloc failed\n");
+	if (!data->map)
+		exit_text("Error\nMalloc failed\n");
 	pd->data = data;
 	pd->mb = mb;
 	pd->fd = -1;
 	pd->line = NULL;
 }
 
+static void	read_loop(t_parse_data *pdata, int *in_map)
+{
+	pdata->line = get_next_line(pdata->fd);
+	while (pdata->line)
+	{
+		parse_line(pdata, pdata->line, in_map);
+		free(pdata->line);
+		pdata->line = get_next_line(pdata->fd);
+	}
+}
+
 void	parse_input(t_init_data *data, char *path)
 {
 	t_parse_data	pdata;
-	int			in_map;
-	t_mapbuf	mb;
+	int				in_map;
+	t_mapbuf		mb;
 
 	if (!data || !path || !check_path(path))
 		exit_text("Error\nWrong file\n");
@@ -50,12 +61,7 @@ void	parse_input(t_init_data *data, char *path)
 	pdata.fd = open(path, O_RDONLY);
 	if (pdata.fd < 0)
 		exit_parse(&pdata, "Error\nWrong file\n");
-	while ((pdata.line = get_next_line(pdata.fd)))
-	{
-		parse_line(&pdata, pdata.line, &in_map);
-		free(pdata.line);
-		pdata.line = NULL;
-	}
+	read_loop(&pdata, &in_map);
 	close(pdata.fd);
 	pdata.fd = -1;
 	if (!in_map)

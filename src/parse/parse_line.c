@@ -26,10 +26,10 @@ static void	parse_config_line(t_parse_data *pdata, char *line)
 		set_texture(pdata, &pdata->data->east_tex, line + 3);
 	else if (!ft_strncmp(line, "F ", 2))
 		set_color(pdata, &pdata->data->has_floor,
-				pdata->data->floor_color, line + 2);
+			pdata->data->floor_color, line + 2);
 	else if (!ft_strncmp(line, "C ", 2))
 		set_color(pdata, &pdata->data->has_ceiling,
-				pdata->data->ceiling_color, line + 2);
+			pdata->data->ceiling_color, line + 2);
 	else
 		exit_parse(pdata, "Error\nInvalid config\n");
 }

@@ -44,32 +44,44 @@ static int	ends_with(const char *s, const char *suffix)
 	return (ft_strncmp(s + (ls - lf), suffix, lf) == 0);
 }
 
+static char	*validate_texture_path(char *path)
+{
+	int	fd;
+
+	if (!path || path[0] == '\0')
+		return (NULL);
+	if (!ends_with(path, ".xpm"))
+		return (NULL);
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		return (NULL);
+	close(fd);
+	return (path);
+}
+
 void	set_texture(t_parse_data *pd, char **dst, char *raw)
 {
 	char	*path;
-	int		fd;
 
 	if (!dst)
 		exit_parse(pd, "Error\nInvalid texture target\n");
 	if (*dst)
 		exit_parse(pd, "Error\nDuplicate texture\n");
 	path = trim_space_ends(raw);
-	if (!path || path[0] == '\0')
+	if (!validate_texture_path(path))
 	{
-		free(path);
-		exit_parse(pd, "Error\nEmpty texture path\n");
-	}
-	if (!ends_with(path, ".xpm"))
-	{
-		free(path);
-		exit_parse(pd, "Error\nTexture must be .xpm\n");
-	}
-	fd = open(path, O_RDONLY);
-	if (fd < 0)
-	{
+		if (!path || path[0] == '\0')
+		{
+			free(path);
+			exit_parse(pd, "Error\nEmpty texture path\n");
+		}
+		if (!ends_with(path, ".xpm"))
+		{
+			free(path);
+			exit_parse(pd, "Error\nTexture must be .xpm\n");
+		}
 		free(path);
 		exit_parse(pd, "Error\nTexture file not readable\n");
 	}
-	close(fd);
 	*dst = path;
 }
