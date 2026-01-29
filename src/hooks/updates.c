@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 17:29:54 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/29 14:52:23 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/29 18:20:28 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "keyboard_keys.h"
 #include "mlx.h"
 #include <unistd.h>
+#include <stdlib.h>
 
 void	my_mlx_pixel_put(t_image *frame, t_player a, int color, int arrow_len)
 {
@@ -75,7 +76,7 @@ void	draw_square(t_image *frame, int x, int y, int color)
 	}
 }
 
-void	create_walls(t_image *new_frame, t_map map)
+void	create_walls(t_image *new_frame, t_map map, int map_unit)
 {
 	int	column;
 	int	row;
@@ -87,16 +88,16 @@ void	create_walls(t_image *new_frame, t_map map)
 		while (column < map.width)
 		{
 			if (map.grid[row][column] == '1'
-				&& column * UNIT_SIZE / 4 <= new_frame->width
-				&& row * UNIT_SIZE / 4 <= new_frame->height) 
-				draw_square (new_frame, column * UNIT_SIZE / 4, row * UNIT_SIZE / 4, 0x5583AFAF);
+				&& column * map_unit <= new_frame->width
+				&& row * map_unit <= new_frame->height) 
+				draw_square (new_frame, column * map_unit, row * map_unit, 0x5583AFAF);
 			column ++;
 		}
 		row ++;
 	}
 }
 
-void	prefill_background(t_image *new_frame)
+void	prefill_background(t_image *new_frame, int map_unit)
 {
 	int	column;
 	int	row;
@@ -107,68 +108,53 @@ void	prefill_background(t_image *new_frame)
 		column = 0;
 		while (column < new_frame->width)
 		{
-			if (column * UNIT_SIZE / 4 <= new_frame->width
-				&& row * UNIT_SIZE / 4 <= new_frame->height) 
-				draw_square (new_frame, column * UNIT_SIZE / 4, row * UNIT_SIZE / 4, 0x99000200);
+			if (column * map_unit <= new_frame->width
+				&& row * map_unit <= new_frame->height) 
+				draw_square (new_frame, column * map_unit,
+					row * map_unit, 0x99000200);
 			column ++;
 		}
 		row ++;
 	}
 }
 
-#include <stdio.h>
-#include <stdlib.h>
-
-void	draw_minimap(t_game *game)
+t_mini_map	create_mini_map( t_game *game, t_image *frame,int scale)
 {
-	t_image	new_frame;
-	// int		scale;
-	int		on_screen_pos_x;
-	int		on_screen_pos_y;
+	t_mini_map	mini_map;
 
-	// scale = 
-	// on_screen_pos_x = WIDTH - (int)(WIDTH / 4);
-	// on_screen_pos_y = HEIGHT - (int)(HEIGHT / 4);
-	on_screen_pos_x = 0;
-	on_screen_pos_y = 0;
-	new_frame.img = mlx_new_image(game->mlx, UNIT_SIZE / 4 * game->map->width, UNIT_SIZE / 4 * game->map->height);
-	if (!new_frame.img)
+	mini_map.scale_factor = scale;
+	mini_map.unit = UNIT_SIZE / mini_map.scale_factor;
+	mini_map.width = mini_map.unit * game->map->width;
+	mini_map.height = mini_map.unit * game->map->height;
+	mini_map.frame = frame;
+	mini_map.frame->width = mini_map.width;
+	mini_map.frame->height = mini_map.height;
+	mini_map.frame->img = mlx_new_image(game->mlx, mini_map.width, mini_map.height);
+	if (!mini_map.frame->img)
 		clean_system_exit (game, FULL,
-			"@draw_minimap: failed to create a new image\n");
-	new_frame.addr = (int *) mlx_get_data_addr (new_frame.img, &new_frame.bpp,
-			&new_frame.line_length, &new_frame.endian);
-	if (!new_frame.addr)
+			"@create_mini_map: failed to create a new image\n");
+	mini_map.frame->addr = (int *) mlx_get_data_addr (mini_map.frame->img, &mini_map.frame->bpp,
+			&mini_map.frame->line_length, &mini_map.frame->endian);
+	if (!mini_map.frame->addr)
 		clean_system_exit (game, FULL,
 			"@draw_minimap: failed to extract addr\n");
-	new_frame.width = UNIT_SIZE / 4 * game->map->width;
-	new_frame.height = UNIT_SIZE / 4 * game->map->height;
-	// printf ("dims are  w %d h %d\n", new_frame.width, new_frame.height);
-	// exit (0);
-	prefill_background (&new_frame);
-	create_walls (&new_frame, *game->map);
-	my_mlx_pixel_put (&new_frame, game->player, 0xff00ff, 10);
-	mlx_put_image_to_window (game->mlx, game->win, new_frame.img, on_screen_pos_x, on_screen_pos_y);
+	return (mini_map);
+}
+void	draw_minimap(t_game *game)
+{
+	t_image		*new_frame;
+	t_mini_map	mini_map;
+	int			padding;
+
+	padding = 10;
+	new_frame = malloc (sizeof (t_image));
+	mini_map = create_mini_map (game, new_frame, 4);
+	prefill_background (mini_map.frame, mini_map.unit);
+	create_walls (mini_map.frame, *game->map, mini_map.unit);
+	my_mlx_pixel_put (mini_map.frame, game->player, 0xB88A63, 10);
+	draw_square (mini_map.frame, game->player.pos_x / 4 - mini_map.unit / 2, game->player.pos_y/ 4 - mini_map.unit / 2, 0xB88A63);
+	mlx_put_image_to_window (game->mlx, game->win, mini_map.frame->img,
+		WIDTH - mini_map.width - padding, HEIGHT - mini_map.height - padding);
 }
 
-// void	update_frame(t_game *game)
-// {
-// 	t_image	new_frame;
-// 	void	*old_image_pointer;
-
-// 	old_image_pointer = game->frame.img;
-// 	new_frame.img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
-// 	if (!new_frame.img)
-// 		clean_system_exit (game, FULL,
-// 			"@update_frame: failed to create a new image\n");
-// 	new_frame.addr = (int *) mlx_get_data_addr (new_frame.img, &new_frame.bpp,
-// 			&new_frame.line_length, &new_frame.endian);
-// 	if (!new_frame.addr)
-// 		clean_system_exit (game, FULL,
-// 			"@update_frame: failed to extract addr\n");
-// 	create_walls (&new_frame, *game->map);
-// 	my_mlx_pixel_put (&new_frame, game->player, 0xff00ff, 10);
-// 	game->frame = new_frame;
-// 	mlx_put_image_to_window (game->mlx, game->win, game->frame.img, 0, 0);
-// 	mlx_destroy_image (game->mlx, old_image_pointer);
-// }
 

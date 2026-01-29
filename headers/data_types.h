@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 12:04:36 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/28 18:22:07 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/29 17:41:49 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define DATA_TYPES_H
 
 # ifndef DEBUG
-#  define DEBUG 1
+#  define DEBUG 0
 # endif
 # ifndef WIDTH
 #  define WIDTH 800
@@ -131,6 +131,15 @@ typedef struct s_input
 	int	rot_right;
 	int	rot_left;
 }	t_input;
+
+typedef struct s_mini_map
+{
+	int		unit;
+	int		width;
+	int		height;
+	int		scale_factor;
+	t_image	*frame;
+}	t_mini_map;
 
 typedef struct s_game
 {
