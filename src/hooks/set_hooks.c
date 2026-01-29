@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 17:29:54 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/28 18:44:47 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/29 14:47:20 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	update_and_render(t_game *game)
 	update_position (game);
 	cast_rays (game);
 	test_render (game);
-	//update_frame (game);
+	draw_minimap (game);
 	return (0);
 }
 

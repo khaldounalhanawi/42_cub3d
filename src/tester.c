@@ -17,12 +17,9 @@ t_init_data	example_data(void)
 	// 	"1000000000000000000000001",
 	// 	"1000000000000000000000001",
 	// 	"1000000000000000000000001",
-	// 	"100000000000000000000001",
+	// 	"10000000000000000000000111111111111111111111",
 	// 	"1000000000000000000000111111",
-	// 	"1000000000000000000000000001",
-	// 	"1000000000000000000000000001",
-	// 	"1000000000000000000000000001",
-	// 	"10000000000000000000000000001",
+	// 	"1000000000000000000000000000",
 	// 	"10000000000000000001010000001",
 	// 	"10000000100000001000000000N0111",
 	// 	"11110111 1110101 101111010001",
@@ -33,7 +30,7 @@ t_init_data	example_data(void)
 		"1000000000110000000000001",
 		"1011000001110000000000001",
 		"1001000000000000000000001",
-		"111111111011000001110000000000001",
+		"11111111101100000111000001",
 		"100000000011000001110111111111111",
 		"11110111111111011100000010001",
 		"11110111111111011101010010001",
@@ -58,11 +55,15 @@ t_init_data	example_data(void)
 	data.map->height = i;
 	data.map->width = max_width;
 
-	// Allocate and copy rows
+	// Allocate and copy rows with space-padding
 	data.map->grid = malloc(sizeof(char *) * data.map->height);
+	
 	for (i = 0; i < data.map->height; i++)
 	{
-		data.map->grid[i] = strdup(map_lines[i]);
+		data.map->grid[i] = malloc(sizeof(char) * (max_width + 1));
+		ft_memset(data.map->grid[i], ' ', max_width);
+		ft_strlcpy(data.map->grid[i], map_lines[i], max_width + 1);
+		data.map->grid[i][max_width] = '\0';
 	}
 
 	data.north_tex = ft_strdup ("./textures/North.xpm");
