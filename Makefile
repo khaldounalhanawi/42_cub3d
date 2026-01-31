@@ -26,8 +26,15 @@ UTILS_OBJS = $(UTILS_CFILES:.c=.o)
 # raycast
 RAYCAST_DIR = ./src/raycast
 RAYCAST_HEADER = $(RAYCAST_DIR)/local_raycast.h
-RAYCAST_CFILES = $(RAYCAST_DIR)/cast_rays.c
+RAYCAST_CFILES = $(RAYCAST_DIR)/cast_rays.c \
+				 $(RAYCAST_DIR)/calculate_distance.c
 RAYCAST_OBJS = $(RAYCAST_CFILES:.c=.o)
+
+# render
+RENDER_DIR = ./src/render
+RENDER_HEADER = $(RENDER_DIR)/local_render.h
+RENDER_CFILES = $(RENDER_DIR)/draw_minimap.c
+RENDER_OBJS = $(RENDER_CFILES:.c=.o)
 
 # hooks
 HOOKS_DIR = ./src/hooks
@@ -46,8 +53,8 @@ LIBFT = $(LIBFT_DIR)/libft.a
 
 all : $(NAME)
 
-$(NAME) : $(MAIN_OBJS) $(LIBFT) $(UTILS_OBJS) $(HOOKS_OBJS) $(HOOKS_HEADER) $(UTILS_HEADER) $(RAYCAST_OBJS)
-	cc $(FLAGS) $(MAIN_OBJS) $(UTILS_OBJS) $(RAYCAST_OBJS) $(HOOKS_OBJS) $(LDFLAGS) $(MLX_L) -o $(NAME)
+$(NAME) : $(MAIN_OBJS) $(LIBFT) $(UTILS_OBJS) $(HOOKS_OBJS) $(HOOKS_HEADER) $(UTILS_HEADER) $(RAYCAST_OBJS) $(RENDER_OBJS) $(RENDER_HEADER)
+	cc $(FLAGS) $(MAIN_OBJS) $(UTILS_OBJS) $(RAYCAST_OBJS) $(RENDER_OBJS) $(HOOKS_OBJS) $(LDFLAGS) $(MLX_L) -o $(NAME)
 
 $(MAIN_DIR)/%.o: $(MAIN_DIR)/%.c $(INCLUDE_PATH)/$(TYPES) $(MAIN_HEADER)
 	cc $(FLAGS) -I $(INCLUDE_PATH) -I $(LIBFT_HEADER_DIR) -I $(INCLUDE_MLX) -c $< -o $@
@@ -61,6 +68,9 @@ $(HOOKS_DIR)/%.o: $(HOOKS_DIR)/%.c $(INCLUDE_PATH)/$(TYPES) $(HOOKS_HEADER)
 $(RAYCAST_DIR)/%.o: $(RAYCAST_DIR)/%.c $(INCLUDE_PATH)/$(TYPES) $(RAYCAST_HEADER) 
 	cc $(FLAGS) -I $(INCLUDE_PATH) -I $(RAYCAST_DIR) -I $(LIBFT_HEADER_DIR) -c $< -o $@
 
+$(RENDER_DIR)/%.o: $(RENDER_DIR)/%.c $(INCLUDE_PATH)/$(TYPES) $(RENDER_HEADER) 
+	cc $(FLAGS) -I $(INCLUDE_PATH) -I $(INCLUDE_MLX) -I $(RENDER_DIR) -I $(LIBFT_HEADER_DIR) -c $< -o $@
+
 $(LIBFT) :
 	$(MAKE) -C $(LIBFT_DIR)
 
@@ -69,6 +79,7 @@ clean :
 	rm -rf $(UTILS_OBJS)
 	rm -rf $(HOOKS_OBJS)
 	rm -rf $(RAYCAST_OBJS)
+	rm -rf $(RENDER_OBJS)
 	$(MAKE) clean -C $(LIBFT_DIR)
 
 fclean : clean

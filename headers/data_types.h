@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 12:04:36 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/29 17:41:49 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/30 16:45:56 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 #  define DEBUG 0
 # endif
 # ifndef WIDTH
-#  define WIDTH 800
+#  define WIDTH 1200
 # endif
 # ifndef HEIGHT
-#  define HEIGHT 600
+#  define HEIGHT 777
 # endif
 # ifndef TEXTURE_DIM
 #  define TEXTURE_DIM 1024
@@ -44,6 +44,12 @@ enum
 	south,
 	east,
 	west
+};
+
+enum
+{
+	X,
+	Y
 };
 
 enum e_cleanup_code
@@ -103,12 +109,12 @@ typedef struct s_raycast
 
 typedef struct s_rayhit_info
 {
-	double	distance;		// distance from player position to a wall
-	int		wall_side;		// which side of the wall that the ray hit, to determind NSEW texture to use
-	double	texture_x_pos;	// going to be (0..1) * TEXTURE_DIM
-	int		line_height;	// the length of the line that needs to be drawn from texture
-	int		draw_start;		// start position of drawing of the line
-	int		draw_end;		// end position of the line
+	double	distance;
+	int		wall_side;
+	double	texture_x_pos;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
 }	t_rayhit_info;
 
 typedef struct s_image

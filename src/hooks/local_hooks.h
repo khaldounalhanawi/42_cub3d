@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 16:00:18 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/29 14:11:01 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/30 16:47:48 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ void	rot_left(t_game *game);
 void	rot_right(t_game *game);
 
 // updates.c
-void	my_mlx_pixel_put(t_image *frame, t_player a, int color, int arrow_len);
 void	update_position(t_game *game);
-void	draw_minimap(t_game *game);
 
 #endif

@@ -6,13 +6,14 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 17:29:54 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/29 20:24:02 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/30 16:51:19 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "data_types.h"
 #include "local_hooks.h"
 #include "ray_caster.h"
+#include "render.h"
 #include "mlx.h"
 
 #include <stdlib.h>
