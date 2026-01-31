@@ -33,7 +33,8 @@ RAYCAST_OBJS = $(RAYCAST_CFILES:.c=.o)
 # render
 RENDER_DIR = ./src/render
 RENDER_HEADER = $(RENDER_DIR)/local_render.h
-RENDER_CFILES = $(RENDER_DIR)/draw_minimap.c
+RENDER_CFILES = $(RENDER_DIR)/draw_minimap.c \
+				$(RENDER_DIR)/basic_draws.c
 RENDER_OBJS = $(RENDER_CFILES:.c=.o)
 
 # hooks
