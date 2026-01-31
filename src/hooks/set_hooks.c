@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 17:29:54 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/30 16:51:19 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/31 18:06:11 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,16 @@
 
 #include <stdlib.h>
 #include <math.h>
+
+void draw_player_sprite(t_game *game)
+{
+	int	screen_pos_x;
+	int	screen_pos_y;
+
+	screen_pos_x = WIDTH / 2 - (game->textures[sprite_player].width / 2);
+	screen_pos_y = HEIGHT - (game->textures[sprite_player].height);
+	mlx_put_image_to_window (game->mlx, game->win, game->textures[sprite_player].img, screen_pos_x, screen_pos_y);
+}
 
 void test_render(t_game *game)
 {
@@ -94,6 +104,7 @@ int	update_and_render(t_game *game)
 	update_position (game);
 	cast_rays (game);
 	test_render (game);
+	draw_player_sprite (game);
 	draw_minimap (game);
 	return (0);
 }

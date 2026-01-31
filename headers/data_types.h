@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 12:04:36 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/30 16:45:56 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/31 18:03:04 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ enum
 	north,
 	south,
 	east,
-	west
+	west,
+	sprite_player
 };
 
 enum
@@ -152,7 +153,7 @@ typedef struct s_game
 	void			*mlx;
 	void			*win;
 	t_image			frame;
-	t_image			textures[4];
+	t_image			textures[5];
 	t_rayhit_info	ray_hits[WIDTH];
 	t_player		player;
 	int				floor_color;

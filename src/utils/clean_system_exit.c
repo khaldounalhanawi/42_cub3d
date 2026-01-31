@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 12:18:22 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/31 17:31:50 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/31 17:53:04 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static void	clear_textures(t_game *game)
 	int	i;
 
 	i = -1;
-	while (++i < 4)
+	while (++i < 5)
 	{
 		if (game->textures[i].img)
 			mlx_destroy_image (game->mlx, game->textures[i].img);
