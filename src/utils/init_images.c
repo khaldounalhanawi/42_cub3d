@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 10:56:59 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/31 18:13:34 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/02/02 17:55:38 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void	load_textures(t_game *game, t_init_data data)
 	game->textures[south] = init_texture (game, data.south_tex);
 	game->textures[east] = init_texture (game, data.east_tex);
 	game->textures[west] = init_texture (game, data.west_tex);
-	game->textures[sprite_player] = init_texture (game, "./textures/player_sprite.xpm");
+	game->textures[sprite_player] = init_texture (game,
+			"./textures/player_sprite.xpm");
 	i = 0;
 	while (i < 5)
 	{

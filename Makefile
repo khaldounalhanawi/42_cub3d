@@ -35,6 +35,7 @@ RENDER_DIR = ./src/render
 RENDER_HEADER = $(RENDER_DIR)/local_render.h
 RENDER_CFILES = $(RENDER_DIR)/draw_minimap.c \
 				$(RENDER_DIR)/draw_sprite_player.c \
+				$(RENDER_DIR)/draw_3d.c \
 				$(RENDER_DIR)/basic_draws.c
 RENDER_OBJS = $(RENDER_CFILES:.c=.o)
 

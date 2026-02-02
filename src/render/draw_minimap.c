@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 17:29:54 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/31 17:33:36 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/02/02 11:26:33 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,4 +125,5 @@ void	draw_minimap(t_game *game)
 	draw_player (game, mini_map, 0xFF2200);
 	mlx_put_image_to_window (game->mlx, game->win, mini_map.frame->img,
 		WIDTH - mini_map.width - padding, HEIGHT - mini_map.height - padding);
+	mlx_destroy_image (game->mlx, mini_map.frame->img);
 }

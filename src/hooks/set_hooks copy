@@ -1,0 +1,207 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   set_hooks copy                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/16 17:29:54 by kalhanaw          #+#    #+#             */
+/*   Updated: 2026/02/02 17:44:27 by kalhanaw         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "data_types.h"
+#include "local_hooks.h"
+#include "ray_caster.h"
+#include "render.h"
+#include "mlx.h"
+
+#include <stdlib.h>
+#include <math.h>
+
+#include <sys/time.h>
+#include <math.h>
+/*
+void	add_vingette(t_game *game)
+{
+	int	range;
+	int	row;
+	int	column;
+	t_image vin_layer;
+	int *pixel;
+	int	alpha;
+
+	vin_layer.img = mlx_new_image (game->mlx, WIDTH, HEIGHT);
+	vin_layer.addr = (int*)mlx_get_data_addr (vin_layer.img, &vin_layer.bpp, &vin_layer.line_length, &vin_layer.endian);
+	// if not bla
+	range = 200;
+	row = 0;
+	int a = 0;
+	while (row < HEIGHT)
+	{
+		column = 0;
+		while (column < WIDTH)
+		{
+			if (row < range)
+			{
+				a = row * 2;
+				if (a > 255)
+					a = 255;
+				alpha = a << 24;
+				pixel =  vin_layer.addr + row * (vin_layer.line_length / 4) + column;
+				*(int *)pixel = alpha | 0x000005;
+			}
+			else if (row >= HEIGHT - range)
+			{
+				a = (HEIGHT - row) * 5;
+				if (a > 255)
+					a = 255;
+				else if (a < 0)
+					a = 0;
+				alpha = a << 24;
+				pixel =  vin_layer.addr + row * (vin_layer.line_length / 4) + column;
+				*(int *)pixel = alpha | 0x000005;
+			}
+			else if (row >= range && row < HEIGHT - range)
+			{
+				pixel =  vin_layer.addr + row * (vin_layer.line_length / 4) + column;
+				*(int *)pixel = 0xFF000000;
+			}
+			column ++;
+		}
+		row ++;
+	}
+	mlx_put_image_to_window (game->mlx, game->win,vin_layer.img, 0, 0);
+}
+*/
+
+void add_vingette(t_game *game)
+{
+    int row, column;
+    int range = 200;
+    int a;
+    t_image vin_layer;
+    int *pixel;
+
+    vin_layer.img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+    vin_layer.addr = (int *)mlx_get_data_addr(
+        vin_layer.img,
+        &vin_layer.bpp,
+        &vin_layer.line_length,
+        &vin_layer.endian);
+
+    row = 0;
+    while (row < HEIGHT)
+    {
+        column = 0;
+        while (column < WIDTH)
+        {
+            pixel = vin_layer.addr
+                + row * (vin_layer.line_length / 4)
+                + column;
+
+            if (row < range)
+                a = (row * 255) / range;
+            else if (row >= HEIGHT - range)
+                a = ((HEIGHT - row) * 255) / range;
+            else
+                a = 255;
+
+            *pixel = (a << 24) | 0x000000;
+            column++;
+        }
+        row++;
+    }
+
+    mlx_put_image_to_window(game->mlx, game->win, vin_layer.img, 0, 0);
+}
+
+void	put_pixel(t_image *frame, int x, int y, int color)
+{
+	frame->addr[y * (frame->line_length / (frame->bpp / 8)) + x] = color;
+}
+
+void	draw_floor_ceiling(t_game *game)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	while (x < game->frame.width)
+	{
+		y = 0;
+		while (y < game->frame.height)
+		{
+			if (y < game->ray_hits[x].draw_start)
+				put_pixel (&game->frame, x, y,game->ceiling_color);
+			if (y > game->ray_hits[x].draw_end)
+				put_pixel (&game->frame, x, y,game->floor_color);
+			y ++;
+		}
+		x ++;
+	}
+}
+
+void	draw_texture_line(t_image *frame, t_rayhit_info ray_info, t_image texture, int x)
+{
+	int		y;
+	int		texture_y;
+	int		color;
+	double	mapped_pos;
+	double	step;
+
+	step = (double)TEXTURE_DIM / ray_info.line_height;
+	mapped_pos = (ray_info.draw_start
+			- HEIGHT / 2
+			+ ray_info.line_height / 2)
+			* step;
+	y = ray_info.draw_start;
+	while (y <= ray_info.draw_end)
+	{
+		texture_y = (int)mapped_pos;
+		if (texture_y >= TEXTURE_DIM)
+			texture_y = TEXTURE_DIM - 1;
+		color = texture.addr[texture_y
+				* TEXTURE_DIM
+				+ (int)ray_info.texture_x_pos];
+		put_pixel (frame, x, y, color);
+		mapped_pos += step;
+		y++;
+	}
+}
+
+void render_frame(t_game *game)
+{
+	int		x;
+
+	x = 0;
+	while (x < WIDTH)
+	{
+		draw_texture_line (&game->frame,
+							game->ray_hits[x],
+							game->textures[game->ray_hits[x].wall_side],
+							x);
+		x++;
+	}
+	draw_floor_ceiling (game);
+	mlx_put_image_to_window(game->mlx, game->win, game->frame.img, 0, 0);
+}
+
+int	update_and_render(t_game *game)
+{
+	update_position (game);
+	cast_rays (game);
+	render_frame (game);
+	draw_player_sprite (game);
+	// add_vingette (game);
+	draw_minimap (game);
+	return (0);
+}
+
+void	set_hooks(t_game *game)
+{
+	mlx_hook (game->win, 17, 0L, close_window, game);
+	mlx_hook (game->win, 2, 1L << 0, key_press, game);
+	mlx_hook (game->win, 3, 1L << 1, key_release, game);
+	mlx_loop_hook (game->mlx, update_and_render, game);
+}
