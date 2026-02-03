@@ -1,11 +1,23 @@
+# Detect OS
+UNAME_S := $(shell uname -s)
+
+# MLX configuration based on OS
+ifeq ($(UNAME_S),Linux)
+	MLX_DIR = ./libs/minilibx-linux
+	MLX_L = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
+	INCLUDE_MLX = $(MLX_DIR)
+else ifeq ($(UNAME_S),Darwin)
+	MLX_DIR = ./libs/minilibx_opengl_20191021
+	MLX_L = -L$(MLX_DIR) -lmlx -lm -framework OpenGL -framework AppKit
+	INCLUDE_MLX = $(MLX_DIR)
+endif
+
 NAME = cub3D
 FLAGS = -Wall -Wextra -Werror -g
 INCLUDE_PATH = ./headers
 TYPES = data_types.h
 LIBRARYS = ./libs
 LDFLAGS = -L$(LIBFT_DIR) -lft
-INCLUDE_MLX = ./libs/minilibx_opengl_20191021
-MLX_L = -L ./libs/minilibx_opengl_20191021 -lmlx -lm -framework OpenGL -framework AppKit
 
 # main
 MAIN_DIR = ./src

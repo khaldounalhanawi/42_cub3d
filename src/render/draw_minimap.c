@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 17:29:54 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/02/02 11:26:33 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/02/03 17:08:05 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,11 @@ static t_mini_map	create_mini_map( t_game *game, t_image *frame, int scale)
 			&mini_map.frame->line_length,
 			&mini_map.frame->endian);
 	if (!mini_map.frame->addr)
+	{
+		mlx_destroy_image (game->mlx, mini_map.frame->img);
 		clean_system_exit (game, FULL,
 			"@draw_minimap: failed to extract addr\n");
+	}
 	return (mini_map);
 }
 

@@ -6,13 +6,25 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 16:00:18 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/30 16:47:48 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/02/03 17:38:20 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LOCAL_HOOKS_H
 # define LOCAL_HOOKS_H
 # include "data_types.h"
+
+enum
+{
+	LINUX,
+	APPLE
+};
+
+# ifdef __linux__
+#  define SYSTEM LINUX
+# elif defined(__APPLE__)
+#  define SYSTEM APPLE
+# endif
 
 // controls.c
 int		key_press(int key, t_game *game);
