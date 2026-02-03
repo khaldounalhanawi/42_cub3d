@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 12:04:36 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/19 16:05:06 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/02/03 11:15:57 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	handle_player_cell(t_init_data *data, int x, int y, int *count)
 	}
 }
 
-void	find_player(t_parse_data *pdata)
+void	find_player(t_temp_parse *pdata)
 {
 	int			x;
 	int			y;

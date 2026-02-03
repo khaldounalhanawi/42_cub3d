@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 12:04:36 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/19 16:05:06 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/02/03 11:14:09 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	check_path(const char *s)
 	return (1);
 }
 
-static void	init_parse_data(t_parse_data *pd, t_init_data *data, t_mapbuf *mb)
+static void	init_parse_data(t_temp_parse *pd, t_init_data *data, t_mapbuf *mb)
 {
 	ft_bzero(data, sizeof(*data));
 	ft_bzero(mb, sizeof(*mb));
@@ -32,12 +32,12 @@ static void	init_parse_data(t_parse_data *pd, t_init_data *data, t_mapbuf *mb)
 	if (!data->map)
 		exit_text("Error\nMalloc failed\n");
 	pd->data = data;
-	pd->mb = mb;
+	pd->map_buffer = mb;
 	pd->fd = -1;
 	pd->line = NULL;
 }
 
-static void	read_loop(t_parse_data *pdata, int *in_map)
+static void	read_loop(t_temp_parse *pdata, int *in_map)
 {
 	pdata->line = get_next_line(pdata->fd);
 	while (pdata->line)
@@ -50,13 +50,13 @@ static void	read_loop(t_parse_data *pdata, int *in_map)
 
 void	parse_input(t_init_data *data, char *path)
 {
-	t_parse_data	pdata;
+	t_temp_parse	pdata;
 	int				in_map;
-	t_mapbuf		mb;
+	t_mapbuf		map_buffer;
 
 	if (!data || !path || !check_path(path))
 		exit_text("Error\nWrong file\n");
-	init_parse_data(&pdata, data, &mb);
+	init_parse_data(&pdata, data, &map_buffer);
 	in_map = 0;
 	pdata.fd = open(path, O_RDONLY);
 	if (pdata.fd < 0)

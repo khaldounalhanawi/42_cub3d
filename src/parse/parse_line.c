@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 12:04:36 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/19 16:05:06 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/02/03 11:15:10 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "parse.h"
 #include <fcntl.h>
 
-static void	parse_config_line(t_parse_data *pdata, char *line)
+static void	parse_config_line(t_temp_parse *pdata, char *line)
 {
 	if (!ft_strncmp(line, "NO ", 3))
 		set_texture(pdata, &pdata->data->north_tex, line + 3);
@@ -34,25 +34,25 @@ static void	parse_config_line(t_parse_data *pdata, char *line)
 		exit_parse(pdata, "Error\nInvalid config\n");
 }
 
-static void	grow_mapbuf(t_parse_data *pdata)
+static void	grow_mapbuf(t_temp_parse *pdata)
 {
 	char	**new_lines;
 	int		new_cap;
 	int		i;
 
-	new_cap = pdata->mb->cap + 16;
+	new_cap = pdata->map_buffer->cap + 16;
 	new_lines = (char **)malloc(sizeof(char *) * new_cap);
 	if (!new_lines)
 		exit_parse(pdata, "Error\nMalloc failed\n");
 	i = 0;
-	while (i < pdata->mb->h)
+	while (i < pdata->map_buffer->h)
 	{
-		new_lines[i] = pdata->mb->lines[i];
+		new_lines[i] = pdata->map_buffer->lines[i];
 		i++;
 	}
-	free(pdata->mb->lines);
-	pdata->mb->lines = new_lines;
-	pdata->mb->cap = new_cap;
+	free(pdata->map_buffer->lines);
+	pdata->map_buffer->lines = new_lines;
+	pdata->map_buffer->cap = new_cap;
 }
 
 static int	len_nl(char *s)
@@ -65,24 +65,24 @@ static int	len_nl(char *s)
 	return (i);
 }
 
-static void	store_map_line(t_parse_data *pdata)
+static void	store_map_line(t_temp_parse *pdata)
 {
 	int		len;
 	char	*dup;
 
-	if (pdata->mb->h == pdata->mb->cap)
+	if (pdata->map_buffer->h == pdata->map_buffer->cap)
 		grow_mapbuf(pdata);
 	dup = ft_strdup(pdata->line);
 	if (!dup)
 		exit_parse(pdata, "Error\nMalloc failed\n");
-	pdata->mb->lines[pdata->mb->h] = dup;
-	pdata->mb->h++;
+	pdata->map_buffer->lines[pdata->map_buffer->h] = dup;
+	pdata->map_buffer->h++;
 	len = len_nl(dup);
-	if (len > pdata->mb->max_w)
-		pdata->mb->max_w = len;
+	if (len > pdata->map_buffer->max_w)
+		pdata->map_buffer->max_w = len;
 }
 
-void	parse_line(t_parse_data *pdata, char *line, int *in_map)
+void	parse_line(t_temp_parse *pdata, char *line, int *in_map)
 {
 	int	type;
 

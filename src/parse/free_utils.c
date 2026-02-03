@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 12:04:36 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/19 16:05:06 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/02/03 11:16:48 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	free_mapbuf(t_mapbuf *mb)
 	mb->max_w = 0;
 }
 
-void	exit_parse(t_parse_data *pdata, char *msg)
+void	exit_parse(t_temp_parse *pdata, char *msg)
 {
 	if (pdata)
 	{
@@ -88,8 +88,8 @@ void	exit_parse(t_parse_data *pdata, char *msg)
 			close(pdata->fd);
 			pdata->fd = -1;
 		}
-		if (pdata->mb)
-			free_mapbuf(pdata->mb);
+		if (pdata->map_buffer)
+			free_mapbuf(pdata->map_buffer);
 		if (pdata->data)
 			free_init_data(pdata->data);
 	}

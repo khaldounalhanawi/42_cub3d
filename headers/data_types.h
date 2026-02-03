@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 12:04:36 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/19 16:05:06 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/02/03 11:13:33 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,13 @@ typedef struct s_init_data
 	char	player_dir;
 } t_init_data;
 
-typedef struct s_parse_data
+typedef struct s_temp_parse
 {
 	t_init_data	*data;
-	t_mapbuf	*mb;
+	t_mapbuf	*map_buffer;
 	int			fd;
 	char		*line;
-}	t_parse_data;
+}	t_temp_parse;
 
 typedef struct s_player
 {

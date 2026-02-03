@@ -6,13 +6,13 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 12:04:36 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/19 16:05:06 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/02/03 11:15:37 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-static char	*pad_line(t_parse_data *pd, char *src, int w)
+static char	*pad_line(t_temp_parse *pd, char *src, int w)
 {
 	char	*dst;
 	int		i;
@@ -32,14 +32,14 @@ static char	*pad_line(t_parse_data *pd, char *src, int w)
 	return (dst);
 }
 
-void	build_map(t_parse_data *pd)
+void	build_map(t_temp_parse *pd)
 {
 	int			i;
 	t_init_data	*data;
 	t_mapbuf	*mb;
 
 	data = pd->data;
-	mb = pd->mb;
+	mb = pd->map_buffer;
 	data->map->height = mb->h;
 	data->map->width = mb->max_w;
 	data->map->grid = ft_calloc(data->map->height, sizeof(char *));
@@ -52,5 +52,5 @@ void	build_map(t_parse_data *pd)
 		i++;
 	}
 	free_mapbuf(mb);
-	pd->mb = NULL;
+	pd->map_buffer = NULL;
 }
