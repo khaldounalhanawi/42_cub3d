@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 12:04:36 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/02/03 11:16:25 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/02/03 11:28:15 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	parse_int_0_255(const char *s, int *i)
 	return ((int)v);
 }
 
-static void	check_color_trailing(t_temp_parse *pd, const char *raw, int i)
+static void	check_color_trailing(t_parse_session *pd, const char *raw, int i)
 {
 	while (raw[i] == ' ' || raw[i] == '\t')
 		i++;
@@ -48,7 +48,7 @@ static void	check_color_trailing(t_temp_parse *pd, const char *raw, int i)
 		exit_parse(pd, "Error\nTrailing junk in color\n");
 }
 
-static void	parse_rgb(t_temp_parse *pd, const char *raw, int rgb[3])
+static void	parse_rgb(t_parse_session *pd, const char *raw, int rgb[3])
 {
 	int	i;
 
@@ -65,7 +65,7 @@ static void	parse_rgb(t_temp_parse *pd, const char *raw, int rgb[3])
 	check_color_trailing(pd, raw, i);
 }
 
-void	set_color(t_temp_parse *pd, int *has_flag, int rgb[3], char *raw)
+void	set_color(t_parse_session *pd, int *has_flag, int rgb[3], char *raw)
 {
 	if (!has_flag || !rgb)
 		exit_parse(pd, "Error\nInvalid color target\n");

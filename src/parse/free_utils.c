@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 12:04:36 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/02/03 11:16:48 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/02/03 11:28:19 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,20 +39,20 @@ void	free_map(t_map *map)
 	free(map);
 }
 
-void	free_init_data(t_init_data *data)
+void	free_init_data(t_init_data *init_data)
 {
-	if (!data)
+	if (!init_data)
 		return ;
-	free(data->north_tex);
-	free(data->south_tex);
-	free(data->west_tex);
-	free(data->east_tex);
-	data->north_tex = NULL;
-	data->south_tex = NULL;
-	data->west_tex = NULL;
-	data->east_tex = NULL;
-	free_map(data->map);
-	data->map = NULL;
+	free(init_data->north_tex);
+	free(init_data->south_tex);
+	free(init_data->west_tex);
+	free(init_data->east_tex);
+	init_data->north_tex = NULL;
+	init_data->south_tex = NULL;
+	init_data->west_tex = NULL;
+	init_data->east_tex = NULL;
+	free_map(init_data->map);
+	init_data->map = NULL;
 }
 
 void	free_mapbuf(t_mapbuf *mb)
@@ -74,7 +74,7 @@ void	free_mapbuf(t_mapbuf *mb)
 	mb->max_w = 0;
 }
 
-void	exit_parse(t_temp_parse *pdata, char *msg)
+void	exit_parse(t_parse_session *pdata, char *msg)
 {
 	if (pdata)
 	{

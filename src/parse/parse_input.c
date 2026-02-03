@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 12:04:36 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/02/03 11:14:09 by kalhanaw         ###   ########.fr       */
+/*   Uparse_sessionated: 2026/02/03 11:27:55 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,48 +24,48 @@ static int	check_path(const char *s)
 	return (1);
 }
 
-static void	init_parse_data(t_temp_parse *pd, t_init_data *data, t_mapbuf *mb)
+static void	init_parse_session(t_parse_session *parse_session, t_init_data *init_data, t_mapbuf *mb)
 {
-	ft_bzero(data, sizeof(*data));
+	ft_bzero(init_data, sizeof(*init_data));
 	ft_bzero(mb, sizeof(*mb));
-	data->map = (t_map *)ft_calloc(1, sizeof(t_map));
-	if (!data->map)
+	init_data->map = (t_map *)ft_calloc(1, sizeof(t_map));
+	if (!init_data->map)
 		exit_text("Error\nMalloc failed\n");
-	pd->data = data;
-	pd->map_buffer = mb;
-	pd->fd = -1;
-	pd->line = NULL;
+	parse_session->data = init_data;
+	parse_session->map_buffer = mb;
+	parse_session->fd = -1;
+	parse_session->line = NULL;
 }
 
-static void	read_loop(t_temp_parse *pdata, int *in_map)
+static void	read_loop(t_parse_session *parse_session, int *in_map)
 {
-	pdata->line = get_next_line(pdata->fd);
-	while (pdata->line)
+	parse_session->line = get_next_line(parse_session->fd);
+	while (parse_session->line)
 	{
-		parse_line(pdata, pdata->line, in_map);
-		free(pdata->line);
-		pdata->line = get_next_line(pdata->fd);
+		parse_line(parse_session, parse_session->line, in_map);
+		free(parse_session->line);
+		parse_session->line = get_next_line(parse_session->fd);
 	}
 }
 
-void	parse_input(t_init_data *data, char *path)
+void	parse_input(t_init_data *init_data, char *path)
 {
-	t_temp_parse	pdata;
+	t_parse_session	parse_session;
 	int				in_map;
 	t_mapbuf		map_buffer;
 
-	if (!data || !path || !check_path(path))
+	if (!init_data || !path || !check_path(path))
 		exit_text("Error\nWrong file\n");
-	init_parse_data(&pdata, data, &map_buffer);
+	init_parse_session(&parse_session, init_data, &map_buffer);
 	in_map = 0;
-	pdata.fd = open(path, O_RDONLY);
-	if (pdata.fd < 0)
-		exit_parse(&pdata, "Error\nWrong file\n");
-	read_loop(&pdata, &in_map);
-	close(pdata.fd);
-	pdata.fd = -1;
+	parse_session.fd = open(path, O_RDONLY);
+	if (parse_session.fd < 0)
+		exit_parse(&parse_session, "Error\nWrong file\n");
+	read_loop(&parse_session, &in_map);
+	close(parse_session.fd);
+	parse_session.fd = -1;
 	if (!in_map)
-		exit_parse(&pdata, "Error\nMissing map\n");
-	build_map(&pdata);
-	find_player(&pdata);
+		exit_parse(&parse_session, "Error\nMissing map\n");
+	build_map(&parse_session);
+	find_player(&parse_session);
 }

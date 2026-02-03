@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 12:04:36 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/02/03 11:12:53 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/02/03 11:28:22 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static char	*validate_texture_path(char *path)
 	return (path);
 }
 
-void	set_texture(t_temp_parse *pd, char **dst, char *raw)
+void	set_texture(t_parse_session *pd, char **dst, char *raw)
 {
 	char	*path;
 

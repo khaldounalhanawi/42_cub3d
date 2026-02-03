@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 12:04:36 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/02/03 11:15:10 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/02/03 11:28:01 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "parse.h"
 #include <fcntl.h>
 
-static void	parse_config_line(t_temp_parse *pdata, char *line)
+static void	parse_config_line(t_parse_session *pdata, char *line)
 {
 	if (!ft_strncmp(line, "NO ", 3))
 		set_texture(pdata, &pdata->data->north_tex, line + 3);
@@ -34,7 +34,7 @@ static void	parse_config_line(t_temp_parse *pdata, char *line)
 		exit_parse(pdata, "Error\nInvalid config\n");
 }
 
-static void	grow_mapbuf(t_temp_parse *pdata)
+static void	grow_mapbuf(t_parse_session *pdata)
 {
 	char	**new_lines;
 	int		new_cap;
@@ -65,7 +65,7 @@ static int	len_nl(char *s)
 	return (i);
 }
 
-static void	store_map_line(t_temp_parse *pdata)
+static void	store_map_line(t_parse_session *pdata)
 {
 	int		len;
 	char	*dup;
@@ -82,7 +82,7 @@ static void	store_map_line(t_temp_parse *pdata)
 		pdata->map_buffer->max_w = len;
 }
 
-void	parse_line(t_temp_parse *pdata, char *line, int *in_map)
+void	parse_line(t_parse_session *pdata, char *line, int *in_map)
 {
 	int	type;
 
