@@ -5,14 +5,17 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/16 12:04:36 by kalhanaw          #+#    #+#             */
-/*   Uparse_sessionated: 2026/02/03 11:27:55 by kalhanaw         ###   ########.fr       */
+/*   Created: 2026/02/03 13:59:06 by kalhanaw          #+#    #+#             */
+/*   Updated: 2026/02/03 13:59:19 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "data_types.h"
-#include "parse.h"
+#include "local_parse.h"
+#include "libft.h"
+#include <stdlib.h>
 #include <fcntl.h>
+#include <unistd.h>
 
 static int	check_path(const char *s)
 {
@@ -24,14 +27,15 @@ static int	check_path(const char *s)
 	return (1);
 }
 
-static void	init_parse_session(t_parse_session *parse_session, t_init_data *init_data, t_mapbuf *mb)
+static void	init_parse_session(t_parse_session *parse_session,
+		t_init_data *data, t_mapbuf *mb)
 {
-	ft_bzero(init_data, sizeof(*init_data));
+	ft_bzero(data, sizeof(*data));
 	ft_bzero(mb, sizeof(*mb));
-	init_data->map = (t_map *)ft_calloc(1, sizeof(t_map));
-	if (!init_data->map)
+	data->map = (t_map *)ft_calloc(1, sizeof(t_map));
+	if (!data->map)
 		exit_text("Error\nMalloc failed\n");
-	parse_session->data = init_data;
+	parse_session->data = data;
 	parse_session->map_buffer = mb;
 	parse_session->fd = -1;
 	parse_session->line = NULL;
@@ -48,15 +52,15 @@ static void	read_loop(t_parse_session *parse_session, int *in_map)
 	}
 }
 
-void	parse_input(t_init_data *init_data, char *path)
+void	parse_input(t_init_data *data, char *path)
 {
 	t_parse_session	parse_session;
 	int				in_map;
 	t_mapbuf		map_buffer;
 
-	if (!init_data || !path || !check_path(path))
+	if (!data || !path || !check_path(path))
 		exit_text("Error\nWrong file\n");
-	init_parse_session(&parse_session, init_data, &map_buffer);
+	init_parse_session(&parse_session, data, &map_buffer);
 	in_map = 0;
 	parse_session.fd = open(path, O_RDONLY);
 	if (parse_session.fd < 0)

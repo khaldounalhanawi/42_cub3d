@@ -6,11 +6,12 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 12:04:36 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/02/03 11:28:15 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/02/03 13:53:40 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "local_parse.h"
+#include "libft.h"
 
 static void	skip_space(const char *s, int *i)
 {

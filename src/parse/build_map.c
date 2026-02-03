@@ -6,11 +6,15 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 12:04:36 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/02/03 11:28:04 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/02/03 13:52:51 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "data_types.h"
+#include "local_parse.h"
+#include "libft.h"
+#include <stddef.h>
+#include <stdlib.h>
 
 static char	*pad_line(t_parse_session *pd, char *src, int w)
 {

@@ -6,13 +6,15 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 12:04:36 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/02/03 11:28:01 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/02/03 13:51:18 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "data_types.h"
-#include "parse.h"
+#include "libft.h"
+#include "local_parse.h"
 #include <fcntl.h>
+#include <stdlib.h>
 
 static void	parse_config_line(t_parse_session *pdata, char *line)
 {

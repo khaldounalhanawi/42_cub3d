@@ -6,13 +6,15 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 12:04:36 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/02/03 11:28:22 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/02/03 13:54:22 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "local_parse.h"
+#include "libft.h"
 #include <fcntl.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 static char	*trim_space_ends(char *s)
 {

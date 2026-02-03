@@ -6,19 +6,13 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 12:04:36 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/02/03 11:28:19 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/02/03 13:59:29 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "local_parse.h"
 #include <unistd.h>
 #include <stdlib.h>
-
-void	exit_text(char *msg)
-{
-	write(2, msg, ft_strlen(msg));
-	exit(1);
-}
 
 void	free_map(t_map *map)
 {
@@ -39,20 +33,20 @@ void	free_map(t_map *map)
 	free(map);
 }
 
-void	free_init_data(t_init_data *init_data)
+void	free_init_data(t_init_data *data)
 {
-	if (!init_data)
+	if (!data)
 		return ;
-	free(init_data->north_tex);
-	free(init_data->south_tex);
-	free(init_data->west_tex);
-	free(init_data->east_tex);
-	init_data->north_tex = NULL;
-	init_data->south_tex = NULL;
-	init_data->west_tex = NULL;
-	init_data->east_tex = NULL;
-	free_map(init_data->map);
-	init_data->map = NULL;
+	free(data->north_tex);
+	free(data->south_tex);
+	free(data->west_tex);
+	free(data->east_tex);
+	data->north_tex = NULL;
+	data->south_tex = NULL;
+	data->west_tex = NULL;
+	data->east_tex = NULL;
+	free_map(data->map);
+	data->map = NULL;
 }
 
 void	free_mapbuf(t_mapbuf *mb)

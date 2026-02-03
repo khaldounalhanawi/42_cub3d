@@ -6,11 +6,12 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 12:04:36 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/02/03 10:52:54 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/02/03 13:51:40 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
+#include "libft.h"
 #include <fcntl.h>
 
 static int	is_space(char c)

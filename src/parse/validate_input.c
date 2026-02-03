@@ -6,12 +6,14 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 12:04:36 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/19 16:05:06 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/02/03 13:56:28 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "data_types.h"
-#include "validating.h"
+#include "local_parse.h"
+#include "libft.h"
+#include <stddef.h>
+#include <stdlib.h>
 
 static void	flood_fill(t_init_data *data, char **visited, int x, int y)
 {

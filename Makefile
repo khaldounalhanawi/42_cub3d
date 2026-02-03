@@ -12,23 +12,30 @@ LIBFT = $(LIBFT_DIR)/libft.a
 
 SRC = \
 	$(SRC_DIR)/main.c \
-	$(SRC_DIR)/parse/parse_input.c \
-	$(SRC_DIR)/parse/parse_line.c \
-	$(SRC_DIR)/parse/check_line.c \
-	$(SRC_DIR)/parse/build_map.c \
-	$(SRC_DIR)/parse/find_player.c \
-	$(SRC_DIR)/parse/set_color.c \
-	$(SRC_DIR)/parse/set_texture.c \
-	$(SRC_DIR)/parse/free_utils.c \
-	$(SRC_DIR)/validating/validate_input.c \
-	$(SRC_DIR)/validating/free_validating.c
+
+#parse
+PARSE_DIR = ./src/parse
+PARSE_HEADER = $(PARSE_DIR)/local_parse.h
+PARSE_CFILES = \
+				$(PARSE_DIR)/parse_input.c \
+				$(PARSE_DIR)/parse_line.c \
+				$(PARSE_DIR)/check_line.c \
+				$(PARSE_DIR)/build_map.c \
+				$(PARSE_DIR)/find_player.c \
+				$(PARSE_DIR)/set_color.c \
+				$(PARSE_DIR)/set_texture.c \
+				$(PARSE_DIR)/free_utils.c \
+				$(PARSE_DIR)/validate_input.c \
+				$(PARSE_DIR)/free_validating.c
+PARSE_OBJS = $(PARSE_CFILES:.c=.o)
+
 
 OBJS = $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+$(NAME): $(OBJS) $(LIBFT) $(PARSE_OBJS)
+	$(CC) $(CFLAGS) $(OBJS) $(PARSE_OBJS) $(LIBFT) -o $(NAME)
 
 $(SRC_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) -I $(INCLUDE_PATH) -I $(LIBFT_HEADER_DIR) -c $< -o $@
@@ -36,8 +43,12 @@ $(SRC_DIR)/%.o: $(SRC_DIR)/%.c
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
 
+$(PARSE_DIR)/%.o: $(PARSE_DIR)/%.c $(PARSE_HEADER)
+	$(CC) $(CFLAGS) -I $(PARSE_DIR) -I $(INCLUDE_PATH) -I $(LIBFT_HEADER_DIR) -c $< -o $@
+
 clean:
 	rm -f $(OBJS)
+	rm -f $(PARSE_OBJS)
 	$(MAKE) clean -C $(LIBFT_DIR)
 
 fclean: clean

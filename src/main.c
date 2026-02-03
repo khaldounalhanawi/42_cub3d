@@ -6,15 +6,17 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 17:29:54 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/02/03 13:04:49 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/02/03 13:35:13 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "data_types.h"
 #include "main.h"
 #include "parse.h"
-#include "validating.h"
+#include "libft.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 static void	dump_init_data(t_init_data *data)
 {
@@ -47,6 +49,12 @@ static void	dump_init_data(t_init_data *data)
 	printf("  Position: (%d, %d)\n", data->player_x, data->player_y);
 	printf("  Direction: %c\n", data->player_dir);
 	printf("\n====================================\n\n");
+}
+
+void	exit_text(char *msg)
+{
+	write(2, msg, ft_strlen(msg));
+	exit(1);
 }
 
 int main(int argc, char **argv)
