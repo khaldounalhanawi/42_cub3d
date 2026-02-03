@@ -18,6 +18,7 @@ INCLUDE_PATH = ./headers
 TYPES = data_types.h
 LIBRARYS = ./libs
 LDFLAGS = -L$(LIBFT_DIR) -lft
+MLX = $(MLX_DIR)/libmlx.a
 
 # main
 MAIN_DIR = ./src
@@ -84,11 +85,14 @@ LIBFT = $(LIBFT_DIR)/libft.a
 
 all : $(NAME)
 
-$(NAME) : $(MAIN_OBJS) $(PARSE_OBJS) $(LIBFT) $(UTILS_OBJS) $(HOOKS_OBJS) $(HOOKS_HEADER) $(UTILS_HEADER) $(RAYCAST_OBJS) $(RENDER_OBJS) $(RENDER_HEADER)
+$(NAME) : $(MLX) $(MAIN_OBJS) $(PARSE_OBJS) $(LIBFT) $(UTILS_OBJS) $(HOOKS_OBJS) $(HOOKS_HEADER) $(UTILS_HEADER) $(RAYCAST_OBJS) $(RENDER_OBJS) $(RENDER_HEADER)
 	cc $(FLAGS) $(MAIN_OBJS) $(PARSE_OBJS) $(UTILS_OBJS) $(RAYCAST_OBJS) $(RENDER_OBJS) $(HOOKS_OBJS) $(LDFLAGS) $(MLX_L) -o $(NAME)
 
 $(MAIN_DIR)/%.o: $(MAIN_DIR)/%.c $(INCLUDE_PATH)/$(TYPES) $(MAIN_HEADER)
 	cc $(FLAGS) -I $(INCLUDE_PATH) -I $(LIBFT_HEADER_DIR) -I $(INCLUDE_MLX) -c $< -o $@
+
+$(MLX) :
+	$(MAKE) -C $(MLX_DIR) CFLAGS="-w"
 
 $(UTILS_DIR)/%.o: $(UTILS_DIR)/%.c $(INCLUDE_PATH)/$(TYPES) $(UTILS_HEADER)
 	cc $(FLAGS) -I $(INCLUDE_PATH) -I $(UTILS_DIR) -I $(INCLUDE_MLX) -I $(LIBFT_HEADER_DIR) -c $< -o $@
@@ -116,6 +120,7 @@ clean :
 	rm -rf $(RAYCAST_OBJS)
 	rm -rf $(RENDER_OBJS)
 	$(MAKE) clean -C $(LIBFT_DIR)
+	$(MAKE) clean -C $(MLX_DIR)
 
 fclean : clean
 	rm -rf $(NAME)
