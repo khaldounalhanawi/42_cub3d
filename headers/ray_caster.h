@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 14:08:28 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/26 17:20:57 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/02/03 16:24:13 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 # define RAY_CASTER_H
 # include "data_types.h"
 
-void	cast_rays (t_game *game);
+void	cast_rays(t_game *game);
 
 #endif

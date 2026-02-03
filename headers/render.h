@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 14:08:28 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/02/02 17:43:37 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/02/03 16:24:46 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 void	draw_minimap(t_game *game);
 
 // draw_sprite_player.c
-void draw_player_sprite(t_game *game);
+void	draw_player_sprite(t_game *game);
 
 // draw_3d.c
-void draw_3d(t_game *game);
+void	draw_3d(t_game *game);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 17:29:54 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/02/03 15:18:36 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/02/03 16:25:22 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 #include "mlx.h"
 #include <stdio.h>
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_game		game;
-	t_init_data data;
+	t_init_data	data;
 
 	if (argc != 2)
 		exit_text ("Wrong count of arguments\n");
