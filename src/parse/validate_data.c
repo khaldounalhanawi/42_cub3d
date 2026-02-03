@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 12:04:36 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/02/03 15:13:51 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/02/03 16:43:00 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ void	validate_data(t_init_data *data)
 	if (!data->north_tex || !data->south_tex
 		|| !data->west_tex || !data->east_tex)
 		exit_validate(data, "Error\nMissing texture\n");
+	if (data->map->height > MAP_LIMIT || data->map->width > MAP_LIMIT)
+		exit_validate(data, "Error\nMap too large!\n");
 	if (!data->has_floor || !data->has_ceiling)
 		exit_validate(data, "Error\nMissing color\n");
 	if (!data->map || !data->map->grid)

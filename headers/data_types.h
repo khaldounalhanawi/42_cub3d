@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 12:04:36 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/02/03 15:16:59 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/02/03 16:46:30 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 # endif
 # ifndef HEIGHT
 #  define HEIGHT 777
+# endif
+# ifndef MAP_LIMIT
+#  define MAP_LIMIT 100
 # endif
 # ifndef TEXTURE_DIM
 #  define TEXTURE_DIM 1024
@@ -37,6 +40,8 @@
 # ifndef FOV
 #  define FOV 0.66
 # endif
+
+
 
 enum
 {
