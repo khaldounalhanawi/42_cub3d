@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validate_input.c                                   :+:      :+:    :+:   */
+/*   validate_data.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 12:04:36 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/02/03 13:56:28 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/02/03 15:13:51 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	check_map_closed(t_init_data *data)
 	free_visited(data, visited);
 }
 
-void	validate_input(t_init_data *data)
+void	validate_data(t_init_data *data)
 {
 	if (!data->north_tex || !data->south_tex
 		|| !data->west_tex || !data->east_tex)

@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 12:04:36 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/31 18:03:04 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/02/03 15:16:59 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,22 @@ typedef struct s_map
 	char	**grid;
 }	t_map;
 
+typedef struct s_mapbuf
+{
+	char	**lines;
+	int		h;
+	int		cap;
+	int		max_w;
+}	t_mapbuf;
+
 typedef struct s_init_data
 {
 	char	*north_tex;
 	char	*south_tex;
 	char	*west_tex;
 	char	*east_tex;
+	int		has_floor;
+	int		has_ceiling;
 	int		floor_color[3];
 	int		ceiling_color[3];
 	t_map	*map;
@@ -79,6 +89,14 @@ typedef struct s_init_data
 	int		player_y;
 	char	player_dir;
 }	t_init_data;
+
+typedef struct s_parse_session
+{
+	t_init_data	*data;
+	t_mapbuf	*map_buffer;
+	int			fd;
+	char		*line;
+}	t_parse_session;
 
 typedef struct s_player
 {

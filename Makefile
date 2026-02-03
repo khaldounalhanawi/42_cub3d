@@ -11,7 +11,7 @@ MLX_L = -L ./libs/minilibx_opengl_20191021 -lmlx -lm -framework OpenGL -framewor
 MAIN_DIR = ./src
 MAIN_HEADER = $(INCLUDE_PATH)/keyboard_keys.h \
 				$(INCLUDE_PATH)/main.h
-MAIN_CFILES = $(MAIN_DIR)/main.c $(MAIN_DIR)/tester.c
+MAIN_CFILES = $(MAIN_DIR)/main.c
 MAIN_OBJS = $(MAIN_CFILES:.c=.o)
 
 # utils
@@ -49,6 +49,22 @@ HOOKS_CFILES = 	$(HOOKS_DIR)/set_hooks.c \
 				$(HOOKS_DIR)/controls.c
 HOOKS_OBJS = $(HOOKS_CFILES:.c=.o)
 
+#parse
+PARSE_DIR = ./src/parse
+PARSE_HEADER = $(PARSE_DIR)/local_parse.h
+PARSE_CFILES = \
+				$(PARSE_DIR)/parse_file.c \
+				$(PARSE_DIR)/parse_line.c \
+				$(PARSE_DIR)/check_line.c \
+				$(PARSE_DIR)/build_map.c \
+				$(PARSE_DIR)/find_player.c \
+				$(PARSE_DIR)/set_color.c \
+				$(PARSE_DIR)/set_texture.c \
+				$(PARSE_DIR)/free_utils.c \
+				$(PARSE_DIR)/validate_data.c \
+				$(PARSE_DIR)/free_validating.c
+PARSE_OBJS = $(PARSE_CFILES:.c=.o)
+
 # Libft
 LIBFT_DIR = $(LIBRARYS)/Libft
 LIBFT_HEADER_DIR = $(LIBFT_DIR)/include
@@ -56,8 +72,8 @@ LIBFT = $(LIBFT_DIR)/libft.a
 
 all : $(NAME)
 
-$(NAME) : $(MAIN_OBJS) $(LIBFT) $(UTILS_OBJS) $(HOOKS_OBJS) $(HOOKS_HEADER) $(UTILS_HEADER) $(RAYCAST_OBJS) $(RENDER_OBJS) $(RENDER_HEADER)
-	cc $(FLAGS) $(MAIN_OBJS) $(UTILS_OBJS) $(RAYCAST_OBJS) $(RENDER_OBJS) $(HOOKS_OBJS) $(LDFLAGS) $(MLX_L) -o $(NAME)
+$(NAME) : $(MAIN_OBJS) $(PARSE_OBJS) $(LIBFT) $(UTILS_OBJS) $(HOOKS_OBJS) $(HOOKS_HEADER) $(UTILS_HEADER) $(RAYCAST_OBJS) $(RENDER_OBJS) $(RENDER_HEADER)
+	cc $(FLAGS) $(MAIN_OBJS) $(PARSE_OBJS) $(UTILS_OBJS) $(RAYCAST_OBJS) $(RENDER_OBJS) $(HOOKS_OBJS) $(LDFLAGS) $(MLX_L) -o $(NAME)
 
 $(MAIN_DIR)/%.o: $(MAIN_DIR)/%.c $(INCLUDE_PATH)/$(TYPES) $(MAIN_HEADER)
 	cc $(FLAGS) -I $(INCLUDE_PATH) -I $(LIBFT_HEADER_DIR) -I $(INCLUDE_MLX) -c $< -o $@
@@ -74,11 +90,15 @@ $(RAYCAST_DIR)/%.o: $(RAYCAST_DIR)/%.c $(INCLUDE_PATH)/$(TYPES) $(RAYCAST_HEADER
 $(RENDER_DIR)/%.o: $(RENDER_DIR)/%.c $(INCLUDE_PATH)/$(TYPES) $(RENDER_HEADER) 
 	cc $(FLAGS) -I $(INCLUDE_PATH) -I $(INCLUDE_MLX) -I $(RENDER_DIR) -I $(LIBFT_HEADER_DIR) -c $< -o $@
 
+$(PARSE_DIR)/%.o: $(PARSE_DIR)/%.c $(INCLUDE_PATH)/$(TYPES) $(PARSE_HEADER) 
+	$(CC) $(CFLAGS) -I $(PARSE_DIR) -I $(INCLUDE_PATH) -I $(LIBFT_HEADER_DIR) -c $< -o $@
+
 $(LIBFT) :
 	$(MAKE) -C $(LIBFT_DIR)
 
 clean :
 	rm -rf $(MAIN_OBJS)
+	rm -rf $(PARSE_OBJS)
 	rm -rf $(UTILS_OBJS)
 	rm -rf $(HOOKS_OBJS)
 	rm -rf $(RAYCAST_OBJS)
