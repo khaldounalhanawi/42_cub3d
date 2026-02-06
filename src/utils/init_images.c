@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 10:56:59 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/02/02 17:55:38 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/02/06 14:00:14 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,19 +53,19 @@ void	load_textures(t_game *game, t_init_data data)
 	}
 }
 
-t_image	init_frame(t_game *game)
+t_image	init_frame(void *mlx, int width, int height)
 {
 	t_image	frame;
 
 	frame.img = NULL;
 	frame.addr = NULL;
-	frame.img = mlx_new_image (game->mlx,
-			game->screen_width, game->screen_height);
+	frame.img = mlx_new_image (mlx, width, height);
 	if (!frame.img)
 		return (frame);
 	frame.addr = (int *)mlx_get_data_addr (frame.img, &frame.bpp,
 			&frame.line_length, &frame.endian);
-	frame.width = WIDTH;
-	frame.height = HEIGHT;
+	// also check if no addr
+	frame.width = width;
+	frame.height = height;
 	return (frame);
 }

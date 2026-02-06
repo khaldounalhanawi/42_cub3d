@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 12:04:36 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/02/03 16:46:30 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/02/06 13:01:42 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,7 @@ typedef struct s_mini_map
 	int		width;
 	int		height;
 	int		scale_factor;
-	t_image	*frame;
+	t_image	frame;
 }	t_mini_map;
 
 typedef struct s_game
@@ -185,6 +185,7 @@ typedef struct s_game
 	int				screen_height;
 	t_map			*map;
 	t_input			input;
+	t_mini_map		minimap;
 }	t_game;
 
 #endif

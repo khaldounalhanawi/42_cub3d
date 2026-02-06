@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 12:18:22 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/27 13:03:32 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/02/06 14:05:05 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,18 @@ static void	init_input(t_game *game)
 	game->input.rot_left = 0;
 }
 
+static t_mini_map	create_mini_map( t_game *game, int scale)
+{
+	t_mini_map	mini_map;
+	
+	mini_map.scale_factor = scale;
+	mini_map.unit = (int)(UNIT_SIZE / scale);
+	mini_map.width = mini_map.unit * game->map->width;
+	mini_map.height = mini_map.unit * game->map->height;
+	mini_map.frame = init_frame (game->mlx, mini_map.width, mini_map.height);
+	return (mini_map);
+}
+
 void	init_system(t_game *game, t_init_data data)
 {
 	game->screen_height = HEIGHT;
@@ -47,11 +59,13 @@ void	init_system(t_game *game, t_init_data data)
 	if (!game->win)
 		clear_data_exit (data, "couldn't create window\n");
 	load_textures (game, data);
-	game->frame = init_frame (game);
+	game->frame = init_frame (game->mlx, WIDTH, HEIGHT);
 	if (!game->frame.img)
 	{
 		clear_data (data);
 		clean_system_exit (game, IMAGES, "couldn't initiate frame\n");
 	}
 	game->map = data.map;
+	game->minimap = create_mini_map (game, 4);
+	// check if minimap no function
 }
