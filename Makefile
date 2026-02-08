@@ -13,8 +13,8 @@ else ifeq ($(UNAME_S),Darwin)
 endif
 
 NAME = cub3D
-# FLAGS = -Wall -Wextra -Werror -g
-FLAGS = -g
+FLAGS = -Wall -Wextra -Werror
+# FLAGS = -g
 INCLUDE_PATH = ./headers
 TYPES = data_types.h
 LIBRARYS = ./libs

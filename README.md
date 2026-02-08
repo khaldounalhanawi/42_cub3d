@@ -13,7 +13,7 @@ Key aspects of the implementation:
 
 ## 💻 Cross-platform Support
 
-Automatically detects and builds for **macOS** (Metal/OpenGL) and **Linux** with the appropriate MiniLibX backend. The Makefile intelligently selects the correct library and compilation flags based on your operating system, requiring zero manual configuration.
+The Makefile automatically detects and builds for **macOS** (Metal/OpenGL) and **Linux** with the appropriate MiniLibX backend.
 
 ## 📝 How to Build
 
