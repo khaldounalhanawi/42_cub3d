@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   updates.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 17:29:54 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/02/03 16:25:22 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/01/30 16:57:27 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "data_types.h"
-#include "main.h"
-#include "parse.h"
-#include "mlx.h"
-#include <stdio.h>
+#include "local_hooks.h"
 
-int	main(int argc, char **argv)
+void	update_position(t_game *game)
 {
-	t_game		game;
-	t_init_data	data;
-
-	if (argc != 2)
-		exit_text ("Wrong count of arguments\n");
-	parse_file (&data, argv[1]);
-	validate_data (&data);
-	init_system (&game, data);
-	data.map = NULL;
-	clear_data (data);
-	set_hooks (&game);
-	mlx_loop (game.mlx);
-	clean_system_exit (&game, FULL, NULL);
-	return (0);
+	if (game->input.forward)
+		move_forward (game);
+	if (game->input.backward)
+		move_backward (game);
+	if (game->input.left)
+		move_left (game);
+	if (game->input.right)
+		move_right (game);
+	if (game->input.rot_left)
+		rot_left (game);
+	if (game->input.rot_right)
+		rot_right (game);
 }

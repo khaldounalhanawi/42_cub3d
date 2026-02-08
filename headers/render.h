@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.h                                             :+:      :+:    :+:   */
+/*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 14:08:28 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/02/03 15:13:16 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/02/03 16:24:46 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_H
-# define MAIN_H
+#ifndef RENDER_H
+# define RENDER_H
+# include "data_types.h"
 
-// t_init_data	example_data(void); //TEMP
-void	init_system(t_game *game, t_init_data data);
-void	clear_data(t_init_data data);
-void	clean_system_exit(t_game *game, int code, char *msg);
-void	clear_data_exit(t_init_data data, char *msg);
+// draw_minimap.c
+void	draw_minimap(t_game *game);
 
-// ./hooks/set_hooks.c
-void	set_hooks(t_game *game);
+// draw_sprite_player.c
+void	draw_player_sprite(t_game *game);
+
+// draw_3d.c
+void	draw_3d(t_game *game);
 
 #endif

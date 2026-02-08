@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.h                                             :+:      :+:    :+:   */
+/*   ray_caster.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 14:08:28 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/02/03 15:13:16 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/02/03 16:24:13 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_H
-# define MAIN_H
+#ifndef RAY_CASTER_H
+# define RAY_CASTER_H
+# include "data_types.h"
 
-// t_init_data	example_data(void); //TEMP
-void	init_system(t_game *game, t_init_data data);
-void	clear_data(t_init_data data);
-void	clean_system_exit(t_game *game, int code, char *msg);
-void	clear_data_exit(t_init_data data, char *msg);
-
-// ./hooks/set_hooks.c
-void	set_hooks(t_game *game);
+void	cast_rays(t_game *game);
 
 #endif

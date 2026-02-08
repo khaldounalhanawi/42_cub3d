@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.h                                             :+:      :+:    :+:   */
+/*   local_render.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/20 14:08:28 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/02/03 15:13:16 by kalhanaw         ###   ########.fr       */
+/*   Created: 2026/01/30 16:35:07 by kalhanaw          #+#    #+#             */
+/*   Updated: 2026/01/31 16:57:46 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_H
-# define MAIN_H
+#ifndef LOCAL_RENDER_H
+# define LOCAL_RENDER_H
+# include "data_types.h"
 
-// t_init_data	example_data(void); //TEMP
-void	init_system(t_game *game, t_init_data data);
-void	clear_data(t_init_data data);
-void	clean_system_exit(t_game *game, int code, char *msg);
-void	clear_data_exit(t_init_data data, char *msg);
-
-// ./hooks/set_hooks.c
-void	set_hooks(t_game *game);
+// basic_draws.c
+void	draw_square(t_image *frame, double pos[], int width, int color);
+void	fill_background(t_image *new_frame, int map_unit, int color);
 
 #endif
