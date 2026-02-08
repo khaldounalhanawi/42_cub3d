@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 12:18:22 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/02/08 11:18:11 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/02/08 11:57:51 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	destroy_display(void *mlx)
 
 void	destroy_display(void *mlx)
 {
-	(void *) mlx;
+	(void) mlx;
 }
 
 #endif

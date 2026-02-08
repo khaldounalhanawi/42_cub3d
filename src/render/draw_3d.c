@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 17:29:54 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/02/02 17:53:47 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/02/08 12:18:52 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,4 @@ void	draw_3d(t_game *game)
 		x++;
 	}
 	draw_floor_ceiling (game);
-	mlx_put_image_to_window(game->mlx, game->win, game->frame.img, 0, 0);
 }
