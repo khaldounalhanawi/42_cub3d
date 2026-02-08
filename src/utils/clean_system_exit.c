@@ -6,11 +6,12 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 12:18:22 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/01/31 17:53:04 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/02/08 11:16:00 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "local_utils.h"
+#include "data_types.h"
 #include "mlx.h"
 #include "libft.h"
 #include <stdlib.h>
@@ -89,8 +90,16 @@ void	clean_system_exit(t_game *game, int code, char *msg)
 	if (code >= FULL)
 	{
 		mlx_destroy_image (game->mlx, game->frame.img);
+		mlx_destroy_image (game->mlx, game->minimap.frame.img);
 		mlx_destroy_window (game->mlx, game->win);
+		if (game->map)
+		{
+			clear_map (game->map);
+			free (game->map);
+		}
 	}
+	destroy_display (game->mlx);
+	free (game->mlx);
 	if (msg)
 		ft_putstr_fd (msg, 2);
 	exit (0);

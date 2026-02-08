@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 12:04:36 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/02/06 13:01:42 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/02/08 11:21:04 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,17 @@
 #  define FOV 0.66
 # endif
 
+enum
+{
+	LINUX,
+	APPLE
+};
 
+# ifdef __linux__
+#  define SYSTEM LINUX
+# elif defined(__APPLE__)
+#  define SYSTEM APPLE
+# endif
 
 enum
 {
@@ -181,8 +191,6 @@ typedef struct s_game
 	t_player		player;
 	int				floor_color;
 	int				ceiling_color;
-	int				screen_width;
-	int				screen_height;
 	t_map			*map;
 	t_input			input;
 	t_mini_map		minimap;

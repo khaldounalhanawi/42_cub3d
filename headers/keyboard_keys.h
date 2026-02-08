@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 12:06:47 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/02/03 17:21:02 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/02/08 11:33:41 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@
 
 # elif defined (__APPLE__)
 // for MAC version
-# define ESC 53
-# define KEY_A 0
-# define KEY_S 1
-# define KEY_D 2
-# define KEY_W 13
-# define KEY_ARROW_L 123
-# define KEY_ARROW_R 124
+#  define ESC 53
+#  define KEY_A 0
+#  define KEY_S 1
+#  define KEY_D 2
+#  define KEY_W 13
+#  define KEY_ARROW_L 123
+#  define KEY_ARROW_R 124
 
 # endif
 

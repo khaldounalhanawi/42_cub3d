@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 17:29:54 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/02/06 14:16:32 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/02/08 11:32:47 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,35 +70,6 @@ static void	draw_walls(t_image *new_frame, t_map map, int map_unit, int color)
 	}
 }
 
-// static t_mini_map	create_mini_map( t_game *game, t_image *frame, int scale)
-// {
-// 	t_mini_map	mini_map;
-
-// 	mini_map.scale_factor = scale;
-// 	mini_map.unit = (int)(UNIT_SIZE / mini_map.scale_factor);
-// 	mini_map.width = mini_map.unit * game->map->width;
-// 	mini_map.height = mini_map.unit * game->map->height;
-// 	mini_map.frame = frame;
-// 	mini_map.frame->width = mini_map.width;
-// 	mini_map.frame->height = mini_map.height;
-// 	mini_map.frame->img = mlx_new_image(game->mlx,
-// 			mini_map.width, mini_map.height);
-// 	if (!mini_map.frame->img)
-// 		clean_system_exit (game, FULL,
-// 			"@create_mini_map: failed to create a new image\n");
-// 	mini_map.frame->addr = (int *)mlx_get_data_addr (mini_map.frame->img,
-// 			&mini_map.frame->bpp,
-// 			&mini_map.frame->line_length,
-// 			&mini_map.frame->endian);
-// 	if (!mini_map.frame->addr)
-// 	{
-// 		mlx_destroy_image (game->mlx, mini_map.frame->img);
-// 		clean_system_exit (game, FULL,
-// 			"@draw_minimap: failed to extract addr\n");
-// 	}
-// 	return (mini_map);
-// }
-
 static void	draw_player(t_game *game, t_mini_map mini_map, int color)
 {
 	double	pos[2];
@@ -117,18 +88,15 @@ static void	draw_player(t_game *game, t_mini_map mini_map, int color)
 
 void	draw_minimap(t_game *game)
 {
-	// t_image		new_frame;
-	// t_mini_map	mini_map;
-	int			padding;
+	int	padding;
 
 	padding = 10;
-	// mini_map = create_mini_map (game, &new_frame, 3);
-	// mini_map = *(game->minimap);
 	fill_background (&(game->minimap.frame), game->minimap.unit, 0x99006666);
-	draw_walls (&(game->minimap.frame), *game->map, game->minimap.unit, 0x22936075);
+	draw_walls (&(game->minimap.frame), *game->map,
+		game->minimap.unit, 0x22936075);
 	draw_player (game, game->minimap, 0xFF2200);
-	mlx_put_image_to_window (game->mlx, game->win, game->minimap.frame.img,
-		WIDTH - game->minimap.width - padding, HEIGHT - game->minimap.height - padding);
-	//mlx_destroy_image (game->mlx, game->minimap->frame->img);
+	mlx_put_image_to_window (game->mlx, game->win,
+		game->minimap.frame.img,
+		WIDTH - game->minimap.width - padding,
+		HEIGHT - game->minimap.height - padding);
 }
-// dont forget to delete minimap frame on clean up

@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 12:18:22 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/02/06 14:05:05 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/02/08 11:20:27 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	init_input(t_game *game)
 static t_mini_map	create_mini_map( t_game *game, int scale)
 {
 	t_mini_map	mini_map;
-	
+
 	mini_map.scale_factor = scale;
 	mini_map.unit = (int)(UNIT_SIZE / scale);
 	mini_map.width = mini_map.unit * game->map->width;
@@ -45,8 +45,6 @@ static t_mini_map	create_mini_map( t_game *game, int scale)
 
 void	init_system(t_game *game, t_init_data data)
 {
-	game->screen_height = HEIGHT;
-	game->screen_width = WIDTH;
 	init_input (game);
 	init_player (game, data);
 	ft_memset (game->ray_hits, 0, sizeof (game->ray_hits));
@@ -67,5 +65,9 @@ void	init_system(t_game *game, t_init_data data)
 	}
 	game->map = data.map;
 	game->minimap = create_mini_map (game, 4);
-	// check if minimap no function
+	if (!game->minimap.frame.img)
+	{
+		clear_data (data);
+		clean_system_exit (game, FULL, "couldn't create minimap\n");
+	}
 }

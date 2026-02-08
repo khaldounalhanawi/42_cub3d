@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 11:16:39 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/02/06 14:00:31 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/02/08 11:16:36 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,8 @@ void	clean_system_exit(t_game *game, int code, char *msg);
 // init_images.c
 void	load_textures(t_game *game, t_init_data data);
 t_image	init_frame(void *mlx, int width, int height);
+
+// linux_destroy_display.c
+void	destroy_display(void *mlx);
 
 #endif

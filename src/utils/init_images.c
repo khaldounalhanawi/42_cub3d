@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 10:56:59 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/02/06 14:00:14 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/02/06 16:37:31 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,11 @@ t_image	init_frame(void *mlx, int width, int height)
 		return (frame);
 	frame.addr = (int *)mlx_get_data_addr (frame.img, &frame.bpp,
 			&frame.line_length, &frame.endian);
-	// also check if no addr
+	if (!frame.addr)
+	{
+		mlx_destroy_image (mlx, frame.img);
+		return (frame);
+	}
 	frame.width = width;
 	frame.height = height;
 	return (frame);
