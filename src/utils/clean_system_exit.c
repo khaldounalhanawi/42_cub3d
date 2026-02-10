@@ -6,7 +6,7 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 12:18:22 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/02/08 11:16:00 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/02/10 10:17:59 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void	clear_data_exit(t_init_data data, char *msg)
 	exit (1);
 }
 
-// free bbpp?
 static void	clear_textures(t_game *game)
 {
 	int	i;
